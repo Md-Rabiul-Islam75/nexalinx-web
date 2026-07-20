@@ -37,7 +37,7 @@ export function Footer() {
               AI-first product engineering partner for startups, SMEs and agencies in the
               USA and Europe. Transforming business with technology solutions.
             </p>
-            <a href="#contact" className="btn-primary mt-6">
+            <a href="/book" className="btn-primary mt-6">
               Book a Discovery Call
             </a>
           </div>

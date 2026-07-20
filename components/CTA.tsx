@@ -21,7 +21,7 @@ export function CTA() {
             </p>
 
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <a href="mailto:hello@nexalinx.com?subject=Discovery%20Call" className="btn-primary text-base">
+              <a href="/book" className="btn-primary text-base">
                 Book a Free Discovery Call
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                   <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />

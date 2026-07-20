@@ -149,7 +149,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <a href="#contact" className="btn-primary">
+          <a href="/book" className="btn-primary">
             Book a Discovery Call
           </a>
         </div>
@@ -180,7 +180,7 @@ export function Header() {
             {NAV.map((item) => (
               <MobileGroup key={item.label} item={item} onNavigate={() => setMobileOpen(false)} />
             ))}
-            <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-3 w-full">
+            <a href="/book" onClick={() => setMobileOpen(false)} className="btn-primary mt-3 w-full">
               Book a Discovery Call
             </a>
           </div>

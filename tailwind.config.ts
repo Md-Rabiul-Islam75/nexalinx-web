@@ -29,6 +29,8 @@ const config: Config = {
         },
         // Secondary — warm coral accent, chosen to catch the eye against the cool primary
         accent: {
+          50: "#FFF1EC",
+          100: "#FFE0D4",
           400: "#FF8A5B",
           500: "#FF6A3D", // primary accent
           600: "#F24E1E",
