@@ -2,7 +2,7 @@ function Stars() {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#FF6A3D" aria-hidden="true">
+        <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#1FA6ED" aria-hidden="true">
           <path d="M12 2l2.9 6.3 6.8.8-5 4.6 1.3 6.7L12 17.9 5.9 20.4l1.3-6.7-5-4.6 6.8-.8z" />
         </svg>
       ))}
@@ -44,17 +44,26 @@ const PLATFORMS = [
   },
 ];
 
-export function Reviews({ variant = "dark" }: { variant?: "dark" | "light" }) {
-  const label = variant === "dark" ? "text-white/70" : "text-slate-500";
+export function Reviews({
+  variant = "dark",
+  compact = false,
+}: {
+  variant?: "dark" | "light";
+  compact?: boolean;
+}) {
   const name = variant === "dark" ? "text-white" : "text-ink";
   return (
-    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+    <div
+      className={`flex flex-wrap items-center gap-y-4 ${
+        compact ? "justify-start gap-x-6" : "justify-center gap-x-10"
+      }`}
+    >
       {PLATFORMS.map((p) => (
-        <div key={p.name} className="flex items-center gap-3">
+        <div key={p.name} className="flex items-center gap-2.5">
           {p.badge}
           <div className="text-left">
             <Stars />
-            <p className={`mt-1 text-xs font-semibold ${name}`}>{p.name}</p>
+            <p className={`mt-0.5 text-[11px] font-semibold ${name}`}>{p.name}</p>
           </div>
         </div>
       ))}

@@ -65,7 +65,7 @@ export function BookingWidget() {
   return (
     <div className="grid overflow-hidden rounded-3xl bg-white shadow-2xl md:grid-cols-[1fr_1.05fr]">
       {/* Left — host + calendar */}
-      <div className="relative bg-accent-500 p-7 text-white sm:p-9">
+      <div className="relative bg-brand-gradient p-7 text-white sm:p-9">
         <div className="pointer-events-none absolute inset-0 opacity-20 [background:radial-gradient(circle_at_80%_0%,#fff,transparent_45%)]" />
         <div className="relative">
           <div className="flex justify-center">
@@ -182,7 +182,7 @@ export function BookingWidget() {
                           onClick={() => setSelectedTime(t)}
                           className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${
                             active
-                              ? "border-accent-500 bg-accent-500 text-white shadow-glow"
+                              ? "border-accent-500 bg-accent-500 text-ink shadow-glow"
                               : "border-slate-200 text-accent-600 hover:border-accent-400 hover:bg-accent-50"
                           }`}
                         >

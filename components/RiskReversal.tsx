@@ -19,7 +19,7 @@ const NODE_BG: Record<string, string> = {
   emerald: "bg-emerald-500",
   brand: "bg-brand-500",
   violet: "bg-violet-500",
-  accent: "bg-accent-500",
+  accent: "bg-accent-600",
 };
 const CHIP: Record<string, string> = {
   emerald: "bg-emerald-50 text-emerald-700",
@@ -144,7 +144,7 @@ export function RiskReversal() {
                 }`}
               >
                 {"featured" in o && o.featured && (
-                  <span className="absolute -top-3 right-5 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-glow">
+                  <span className="absolute -top-3 right-5 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink shadow-glow">
                     Most chosen
                   </span>
                 )}

@@ -28,13 +28,16 @@ const config: Config = {
           600: "#5138C0",
           700: "#4630A0",
         },
-        // Secondary — warm coral accent, chosen to catch the eye against the cool primary
+        // Secondary — bright blue accent from the logo (#47C3FC). Bright fills use DARK text.
         accent: {
-          50: "#FFF1EC",
-          100: "#FFE0D4",
-          400: "#FF8A5B",
-          500: "#FF6A3D", // primary accent
-          600: "#F24E1E",
+          50: "#EAF7FE",
+          100: "#CFEFFD",
+          200: "#A5E1FC",
+          300: "#73D1FB",
+          400: "#5FCBFD",
+          500: "#47C3FC", // logo bright blue
+          600: "#1FA6ED",
+          700: "#0E7EBE",
         },
         // Deep navy blue (Simform-style) — replaces near-black for dark surfaces & headings
         ink: {

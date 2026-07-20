@@ -214,7 +214,7 @@ function FeaturedCard({ offer: o }: { offer: Offer }) {
     <article className="group relative flex flex-col overflow-hidden rounded-3xl bg-navy-gradient p-7 text-white shadow-glow ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 sm:p-8 lg:-my-2">
       <div className="bg-grid absolute inset-0 opacity-[0.07]" />
       <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-accent-500/25 blur-3xl" />
-      <span className="absolute right-6 top-6 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-glow">
+      <span className="absolute right-6 top-6 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink shadow-glow">
         Most popular
       </span>
 
@@ -251,7 +251,7 @@ function FeaturedCard({ offer: o }: { offer: Offer }) {
 
       <a
         href="/book"
-        className="relative mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-600"
+        className="relative mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-ink transition hover:bg-accent-400"
       >
         {o.cta}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
