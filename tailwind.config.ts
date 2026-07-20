@@ -8,24 +8,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary — sampled from the Nexalinx logo (blue → violet gradient)
+        // Primary — sampled directly from the Nexalinx logo N (azure #1890F0)
         brand: {
-          50: "#EEF3FF",
-          100: "#D9E5FF",
-          200: "#B8CEFF",
-          300: "#8AAEFF",
-          400: "#5B87FB",
-          500: "#2E6BF0", // primary blue
-          600: "#1E52D6",
-          700: "#1B43AD",
-          800: "#1C3B8A",
-          900: "#1B3470",
+          50: "#EAF6FE",
+          100: "#D0EBFD",
+          200: "#A6DAFB",
+          300: "#6EC5F8",
+          400: "#38ABF4",
+          500: "#1890F0", // logo dominant blue
+          600: "#0E74D8",
+          700: "#115CAC",
+          800: "#154D8A",
+          900: "#163F6E",
         },
+        // Indigo-violet — the deep blue / pixel dots at the bottom of the logo N (#6048D8)
         violet: {
-          400: "#9A6BF5",
-          500: "#7C3AED", // logo violet / pixel dots
-          600: "#6D28D9",
-          700: "#5B21B6",
+          400: "#8168EC",
+          500: "#6048D8",
+          600: "#5138C0",
+          700: "#4630A0",
         },
         // Secondary — warm coral accent, chosen to catch the eye against the cool primary
         accent: {
@@ -54,16 +55,17 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-inter)", "sans-serif"],
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(135deg, #2E6BF0 0%, #6D28D9 100%)",
+        // Matches the logo N: bright azure → blue → indigo-violet (its pixel dots)
+        "brand-gradient": "linear-gradient(135deg, #12A2F0 0%, #1E86F0 45%, #5A45D6 100%)",
         "brand-gradient-soft":
-          "linear-gradient(135deg, rgba(46,107,240,0.12) 0%, rgba(109,40,217,0.12) 100%)",
-        // Deep-blue surfaces for dark sections (navy → brand blue)
-        "navy-gradient": "linear-gradient(160deg, #071539 0%, #0E2A6E 55%, #1E52D6 130%)",
-        "cta-gradient": "linear-gradient(120deg, #0B1E45 0%, #1E52D6 55%, #2E6BF0 100%)",
+          "linear-gradient(135deg, rgba(24,144,240,0.12) 0%, rgba(96,72,216,0.12) 100%)",
+        // Deep-blue surfaces for dark sections (navy → logo azure)
+        "navy-gradient": "linear-gradient(160deg, #06183F 0%, #0E2C72 55%, #1F86E8 130%)",
+        "cta-gradient": "linear-gradient(120deg, #0B1E45 0%, #1466D6 52%, #1F90F0 100%)",
       },
       boxShadow: {
-        soft: "0 10px 40px -12px rgba(28, 53, 112, 0.25)",
-        glow: "0 20px 60px -15px rgba(109, 40, 217, 0.45)",
+        soft: "0 10px 40px -12px rgba(21, 77, 138, 0.25)",
+        glow: "0 20px 60px -15px rgba(24, 144, 240, 0.45)",
         card: "0 4px 24px -8px rgba(16, 24, 64, 0.12)",
       },
       keyframes: {

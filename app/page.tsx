@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { TrustBar } from "@/components/TrustBar";
 import { Services } from "@/components/Services";
+import { Offers } from "@/components/Offers";
 import { Pillars } from "@/components/Pillars";
 import { Proof } from "@/components/Proof";
 import { RiskReversal } from "@/components/RiskReversal";
@@ -19,6 +20,7 @@ export default function Home() {
         <Pillars />
         <Proof />
         <RiskReversal />
+        <Offers />
         <CTA />
       </main>
       <Footer />
