@@ -1,27 +1,32 @@
 import { Logo } from "./Logo";
+import { SERVICES } from "@/lib/services";
 
-const COLUMNS = [
+type Column = { heading: string; links: { label: string; href: string }[] };
+
+const COLUMNS: Column[] = [
   {
     heading: "Services",
     links: [
-      "AI Development & Automation",
-      "Web Design & Conversion",
-      "Web App / SaaS MVP",
-      "Mobile App Development",
-      "White-label Delivery",
+      ...SERVICES.map((s) => ({ label: s.navLabel, href: `/services/${s.slug}` })),
+      { label: "All services", href: "/services" },
     ],
   },
   {
     heading: "Company",
-    links: ["How we work", "Proof of work", "Why Nexalinx", "Contact"],
+    links: [
+      { label: "How we work", href: "/#pillars" },
+      { label: "Success stories", href: "/success-stories" },
+      { label: "Why Nexalinx", href: "/#pillars" },
+      { label: "Contact", href: "/#contact" },
+    ],
   },
   {
     heading: "Offers",
     links: [
-      "AI Opportunity Audit",
-      "UX Teardown",
-      "MVP Blueprint Sprint",
-      "App Rescue Sprint",
+      { label: "AI Opportunity Audit", href: "/#offers" },
+      { label: "UX Teardown", href: "/#offers" },
+      { label: "MVP Blueprint Sprint", href: "/#offers" },
+      { label: "White-label Partnership", href: "/services/dedicated-team-cto-support" },
     ],
   },
 ];
@@ -49,9 +54,9 @@ export function Footer() {
               </h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#contact" className="text-sm text-slate-400 transition-colors hover:text-white">
-                      {link}
+                  <li key={link.label}>
+                    <a href={link.href} className="text-sm text-slate-400 transition-colors hover:text-white">
+                      {link.label}
                     </a>
                   </li>
                 ))}

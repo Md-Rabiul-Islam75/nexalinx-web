@@ -1,81 +1,11 @@
-type Service = {
-  title: string;
-  desc: string;
-  points: string[];
-  icon: React.ReactNode;
-  featured?: boolean;
-};
+import Link from "next/link";
 
-const ICON = "w-6 h-6";
+import { ServiceIcon } from "./ServiceIcon";
+import { SERVICES } from "@/lib/services";
+import { ACCENTS } from "@/lib/serviceTheme";
 
-const SERVICES: Service[] = [
-  {
-    title: "AI Development & Automation",
-    desc: "Practical AI that cuts manual work — not hype.",
-    points: ["AI chatbots & agents", "RAG knowledge bases", "Workflow & document automation"],
-    featured: true,
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3 4.9 4.9M19.1 19.1l-1.4-1.4M17.7 6.3l1.4-1.4M4.9 19.1l1.4-1.4" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Web Design & Conversion Sites",
-    desc: "Websites that generate leads, not just look good.",
-    points: ["Corporate & SaaS sites", "Landing pages & redesign", "Performance & SEO foundation"],
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="3" y="4" width="18" height="16" rx="2" />
-        <path d="M3 9h18M7 6.5h.01M9.5 6.5h.01" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Web Application / SaaS MVP",
-    desc: "Turn your idea into a testable, scalable MVP.",
-    points: ["MVP & admin dashboards", "Subscription SaaS", "Customer portals & APIs"],
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="m8 6-5 6 5 6M16 6l5 6-5 6M13 4l-2 16" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Mobile App Development",
-    desc: "iOS & Android apps users actually keep.",
-    points: ["React Native / Flutter", "Payments, maps, notifications", "User app + admin panel"],
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="7" y="2" width="10" height="20" rx="2.5" />
-        <path d="M11 18h2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Critical Product Engineering",
-    desc: "High-security, high-performance systems.",
-    points: ["Crypto / fintech workflows", "Complex APIs & backends", "Performance optimization"],
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6l-8-3Z" strokeLinejoin="round" />
-        <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Dedicated Team / CTO Support",
-    desc: "A senior-led offshore team with US/EU discipline.",
-    points: ["Developers, PM, QA, DevOps", "Tech lead & architecture", "White-label delivery"],
-    icon: (
-      <svg className={ICON} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="9" cy="8" r="3" />
-        <path d="M15.5 6.5a3 3 0 0 1 0 5.5M4 20a5 5 0 0 1 10 0M14.5 15.5A5 5 0 0 1 20 20" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-];
+/** Three headline capabilities shown on each home-page card. */
+const PREVIEW_COUNT = 3;
 
 export function Services() {
   return (
@@ -94,36 +24,52 @@ export function Services() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => (
-            <article
-              key={s.title}
-              className={`card group ${
-                s.featured ? "ring-1 ring-brand-100" : ""
-              }`}
-            >
-              <div
-                className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                  s.featured
-                    ? "bg-brand-gradient text-white"
-                    : "bg-brand-50 text-brand-600"
-                }`}
+          {SERVICES.map((s) => {
+            const a = ACCENTS[s.accent];
+            return (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="card group flex flex-col"
               >
-                {s.icon}
-              </div>
-              <h3 className="mt-5 font-display text-lg font-bold text-ink">{s.title}</h3>
-              <p className="mt-2 text-sm text-slate-500">{s.desc}</p>
-              <ul className="mt-4 space-y-2">
-                {s.points.map((p) => (
-                  <li key={p} className="flex items-start gap-2 text-sm text-slate-600">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-500">
-                      <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+                <div
+                  className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${a.grad} text-white transition-transform duration-300 group-hover:scale-110`}
+                >
+                  <ServiceIcon name={s.icon} />
+                </div>
+
+                <h3 className="mt-5 font-display text-lg font-bold text-ink">{s.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">{s.summary}</p>
+
+                <ul className="mt-4 flex-1 space-y-2">
+                  {s.deliverables.slice(0, PREVIEW_COUNT).map((d) => (
+                    <li key={d.title} className="flex items-start gap-2 text-sm text-slate-600">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-500">
+                        <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {d.title}
+                    </li>
+                  ))}
+                </ul>
+
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-all group-hover:gap-2.5">
+                  Explore service
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link href="/services" className="btn-ghost">
+            Compare all six service lanes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

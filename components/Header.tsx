@@ -10,28 +10,30 @@ const NAV: NavItem[] = [
   {
     label: "Solutions",
     menu: [
-      { label: "Starting from an idea", desc: "Turn a concept into a working MVP", href: "#services", icon: "spark" },
-      { label: "Recovering a bad build", desc: "Rescue a slow, buggy or stalled app", href: "#risk", icon: "wrench" },
-      { label: "Scaling what you've built", desc: "Add features, speed & reliability", href: "#services", icon: "trend" },
-      { label: "From prototype to production", desc: "Make no-code / AI prototypes production-ready", href: "#services", icon: "bolt" },
+      { label: "Starting from an idea", desc: "Turn a concept into a working MVP", href: "/services/web-app-saas-mvp", icon: "spark" },
+      { label: "Recovering a bad build", desc: "Rescue a slow, buggy or stalled app", href: "/services/critical-product-engineering", icon: "wrench" },
+      { label: "Scaling what you've built", desc: "Add features, speed & reliability", href: "/services/dedicated-team-cto-support", icon: "trend" },
+      { label: "From prototype to production", desc: "Make no-code / AI prototypes production-ready", href: "/services/ai-development-automation", icon: "bolt" },
     ],
   },
   {
     label: "Why Nexalinx",
     menu: [
-      { label: "How we work", desc: "Idea → blueprint → build → launch", href: "#pillars", icon: "flow" },
-      { label: "Our difference", desc: "Accountable, fast, production-ready", href: "#pillars", icon: "shield" },
+      { label: "How we work", desc: "Idea → blueprint → build → launch", href: "/#pillars", icon: "flow" },
+      { label: "Our difference", desc: "Accountable, fast, production-ready", href: "/#pillars", icon: "shield" },
     ],
   },
-  { label: "Success Stories", href: "#proof" },
+  { label: "Success Stories", href: "/success-stories" },
   {
     label: "Services",
     menu: [
-      { label: "AI Development & Automation", href: "#services", icon: "ai" },
-      { label: "Web Design & Conversion", href: "#services", icon: "web" },
-      { label: "Web App / SaaS MVP", href: "#services", icon: "app" },
-      { label: "Mobile App Development", href: "#services", icon: "mobile" },
-      { label: "White-label / Dedicated Team", href: "#services", icon: "team" },
+      { label: "AI Development & Automation", href: "/services/ai-development-automation", icon: "ai" },
+      { label: "Web Design & Conversion", href: "/services/web-design-conversion", icon: "web" },
+      { label: "Web App / SaaS MVP", href: "/services/web-app-saas-mvp", icon: "app" },
+      { label: "Mobile App Development", href: "/services/mobile-app-development", icon: "mobile" },
+      { label: "Critical Product Engineering", href: "/services/critical-product-engineering", icon: "shield" },
+      { label: "Dedicated Team / CTO Support", href: "/services/dedicated-team-cto-support", icon: "team" },
+      { label: "All services", href: "/services", icon: "grid" },
     ],
   },
   {
@@ -41,7 +43,7 @@ const NAV: NavItem[] = [
       { label: "Founder Resources", desc: "Guides, checklists & templates", href: "#", icon: "folder" },
     ],
   },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Header() {
@@ -76,7 +78,7 @@ export function Header() {
       }`}
     >
       <div className="container-x flex h-20 items-center justify-between">
-        <a href="#top" aria-label="Nexalinx home">
+        <a href="/" aria-label="Nexalinx home">
           <Logo variant={dark ? "light" : "dark"} />
         </a>
 
@@ -288,6 +290,12 @@ const ICONS = {
   team: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <circle cx="9" cy="8" r="3" /><path d="M4 20a5 5 0 0 1 10 0M15 6a3 3 0 0 1 0 6" strokeLinecap="round" />
+    </svg>
+  ),
+  grid: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="4" y="4" width="7" height="7" rx="1.8" /><rect x="13" y="4" width="7" height="7" rx="1.8" />
+      <rect x="4" y="13" width="7" height="7" rx="1.8" /><rect x="13" y="13" width="7" height="7" rx="1.8" />
     </svg>
   ),
   blog: (

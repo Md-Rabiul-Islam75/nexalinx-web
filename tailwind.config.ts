@@ -4,9 +4,14 @@ const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      screens: {
+        // Wide enough that a fixed right-edge rail clears the max-w-7xl container
+        wide: "1440px",
+      },
       colors: {
         // Primary — sampled directly from the Nexalinx logo N (azure #1890F0)
         brand: {
