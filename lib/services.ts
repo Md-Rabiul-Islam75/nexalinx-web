@@ -28,7 +28,13 @@ export type IconKey =
   | "bolt"
   | "users"
   | "check"
-  | "layers";
+  | "layers"
+  | "wrench"
+  | "trend"
+  | "grid"
+  | "blog"
+  | "folder"
+  | "rocket";
 
 export type Accent = "brand" | "accent" | "violet" | "emerald" | "indigo" | "amber";
 

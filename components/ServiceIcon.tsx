@@ -182,6 +182,43 @@ const PATHS: Record<IconKey, React.ReactNode> = {
       <path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16.5 12 21l8.5-4.5" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+  wrench: (
+    <>
+      <path d="M15.2 6.2a4.2 4.2 0 0 0-5.3 5.3L3.5 17.9a1.6 1.6 0 0 0 0 2.3l.3.3a1.6 1.6 0 0 0 2.3 0l6.4-6.4a4.2 4.2 0 0 0 5.3-5.3l-2.6 2.6-2.2-.4-.4-2.2 2.6-2.6Z" strokeLinejoin="round" />
+    </>
+  ),
+  trend: (
+    <>
+      <path d="M3.5 16.5 9 11l3.5 3.5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14.5 7H20v5.5" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+  grid: (
+    <>
+      <rect x="3.5" y="3.5" width="7" height="7" rx="2" />
+      <rect x="13.5" y="3.5" width="7" height="7" rx="2" />
+      <rect x="3.5" y="13.5" width="7" height="7" rx="2" />
+      <rect x="13.5" y="13.5" width="7" height="7" rx="2" />
+    </>
+  ),
+  blog: (
+    <>
+      <rect x="3.5" y="4" width="17" height="16" rx="2.5" />
+      <path d="M7.5 9h9M7.5 12.5h9M7.5 16h5" strokeLinecap="round" />
+    </>
+  ),
+  folder: (
+    <>
+      <path d="M3 7.5A2 2 0 0 1 5 5.5h3.6l2 2H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9Z" strokeLinejoin="round" />
+    </>
+  ),
+  rocket: (
+    <>
+      <path d="M12 2.5c3 2 4.8 5.4 4.8 9.2l-1.9 3.6H9.1L7.2 11.7C7.2 7.9 9 4.5 12 2.5Z" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="1.8" />
+      <path d="M9.1 15.3 7 17.2v3l2.8-1.4M14.9 15.3 17 17.2v3l-2.8-1.4" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
 };
 
 export function ServiceIcon({

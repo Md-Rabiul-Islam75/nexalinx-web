@@ -1,46 +1,153 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Logo } from "./Logo";
 
-type SubItem = { label: string; desc?: string; href: string; icon: keyof typeof ICONS };
-type NavItem = { label: string; href?: string; menu?: SubItem[] };
+import { Logo } from "./Logo";
+import { ServiceIcon } from "./ServiceIcon";
+import type { IconKey, Accent } from "@/lib/services";
+import { ACCENTS } from "@/lib/serviceTheme";
+
+type SubItem = {
+  label: string;
+  desc?: string;
+  href: string;
+  icon: IconKey;
+  accent?: Accent;
+};
+
+type NavItem = {
+  label: string;
+  href?: string;
+  menu?: SubItem[];
+  /** Panel width — sized per group so labels never wrap awkwardly */
+  width?: string;
+  /** Optional promoted row pinned to the bottom of the panel */
+  footer?: { label: string; href: string; icon: IconKey };
+};
 
 const NAV: NavItem[] = [
   {
     label: "Solutions",
+    width: "w-[23rem]",
     menu: [
-      { label: "Starting from an idea", desc: "Turn a concept into a working MVP", href: "/services/web-app-saas-mvp", icon: "spark" },
-      { label: "Recovering a bad build", desc: "Rescue a slow, buggy or stalled app", href: "/services/critical-product-engineering", icon: "wrench" },
-      { label: "Scaling what you've built", desc: "Add features, speed & reliability", href: "/services/dedicated-team-cto-support", icon: "trend" },
-      { label: "From prototype to production", desc: "Make no-code / AI prototypes production-ready", href: "/services/ai-development-automation", icon: "bolt" },
+      {
+        label: "Starting from an idea",
+        desc: "Turn a concept into a working MVP",
+        href: "/services/web-app-saas-mvp",
+        icon: "rocket",
+        accent: "violet",
+      },
+      {
+        label: "Recovering a bad build",
+        desc: "Rescue a slow, buggy or stalled app",
+        href: "/services/critical-product-engineering",
+        icon: "wrench",
+        accent: "emerald",
+      },
+      {
+        label: "Scaling what you've built",
+        desc: "Add features, speed & reliability",
+        href: "/services/dedicated-team-cto-support",
+        icon: "trend",
+        accent: "amber",
+      },
+      {
+        label: "Prototype to production",
+        desc: "Make no-code / AI prototypes production-ready",
+        href: "/services/ai-development-automation",
+        icon: "bolt",
+        accent: "brand",
+      },
     ],
   },
   {
     label: "Why Nexalinx",
+    width: "w-[22rem]",
     menu: [
-      { label: "How we work", desc: "Idea → blueprint → build → launch", href: "/#pillars", icon: "flow" },
-      { label: "Our difference", desc: "Accountable, fast, production-ready", href: "/#pillars", icon: "shield" },
+      {
+        label: "How we work",
+        desc: "Idea → blueprint → build → launch",
+        href: "/#pillars",
+        icon: "flow",
+        accent: "brand",
+      },
+      {
+        label: "Our difference",
+        desc: "Accountable, fast, production-ready",
+        href: "/#pillars",
+        icon: "shield",
+        accent: "emerald",
+      },
     ],
   },
   { label: "Success Stories", href: "/success-stories" },
   {
     label: "Services",
+    width: "w-[24rem]",
+    footer: { label: "Compare all six services", href: "/services", icon: "grid" },
     menu: [
-      { label: "AI Development & Automation", href: "/services/ai-development-automation", icon: "ai" },
-      { label: "Web Design & Conversion", href: "/services/web-design-conversion", icon: "web" },
-      { label: "Web App / SaaS MVP", href: "/services/web-app-saas-mvp", icon: "app" },
-      { label: "Mobile App Development", href: "/services/mobile-app-development", icon: "mobile" },
-      { label: "Critical Product Engineering", href: "/services/critical-product-engineering", icon: "shield" },
-      { label: "Dedicated Team / CTO Support", href: "/services/dedicated-team-cto-support", icon: "team" },
-      { label: "All services", href: "/services", icon: "grid" },
+      {
+        label: "AI Development & Automation",
+        desc: "Chatbots, RAG, agents & workflow automation",
+        href: "/services/ai-development-automation",
+        icon: "ai",
+        accent: "brand",
+      },
+      {
+        label: "Web Design & Conversion",
+        desc: "Sites that generate leads, not compliments",
+        href: "/services/web-design-conversion",
+        icon: "web",
+        accent: "accent",
+      },
+      {
+        label: "Web App / SaaS MVP",
+        desc: "MVPs, portals, dashboards & subscription SaaS",
+        href: "/services/web-app-saas-mvp",
+        icon: "app",
+        accent: "violet",
+      },
+      {
+        label: "Mobile App Development",
+        desc: "iOS & Android from one codebase",
+        href: "/services/mobile-app-development",
+        icon: "mobile",
+        accent: "indigo",
+      },
+      {
+        label: "Critical Product Engineering",
+        desc: "Fintech, crypto & high-performance systems",
+        href: "/services/critical-product-engineering",
+        icon: "shield",
+        accent: "emerald",
+      },
+      {
+        label: "Dedicated Team / CTO Support",
+        desc: "A senior squad, white-label if you need it",
+        href: "/services/dedicated-team-cto-support",
+        icon: "team",
+        accent: "amber",
+      },
     ],
   },
   {
     label: "Insights",
+    width: "w-[22rem]",
     menu: [
-      { label: "Blog", desc: "AI, MVP & product engineering notes", href: "#", icon: "blog" },
-      { label: "Founder Resources", desc: "Guides, checklists & templates", href: "#", icon: "folder" },
+      {
+        label: "Blog",
+        desc: "AI, MVP & product engineering notes",
+        href: "#",
+        icon: "blog",
+        accent: "brand",
+      },
+      {
+        label: "Founder Resources",
+        desc: "Guides, checklists & templates",
+        href: "#",
+        icon: "folder",
+        accent: "violet",
+      },
     ],
   },
   { label: "Contact", href: "/#contact" },
@@ -113,25 +220,28 @@ export function Header() {
                     onMouseEnter={() => openWith(item.label)}
                     onMouseLeave={scheduleClose}
                   >
-                    <div className="w-72 rounded-2xl border border-slate-100 bg-white p-2 shadow-soft">
+                    <div
+                      className={`${item.width ?? "w-[22rem]"} animate-fade-up overflow-hidden rounded-2xl border border-slate-100 bg-white p-2 shadow-soft`}
+                    >
                       {item.menu.map((sub) => (
-                        <a
-                          key={sub.label}
-                          href={sub.href}
-                          onClick={() => setOpenMenu(null)}
-                          className="group flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-brand-50"
-                        >
-                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-gradient text-white">
-                            {ICONS[sub.icon]}
-                          </span>
-                          <span>
-                            <span className="block text-sm font-semibold text-ink">{sub.label}</span>
-                            {sub.desc && (
-                              <span className="block text-xs text-slate-500">{sub.desc}</span>
-                            )}
-                          </span>
-                        </a>
+                        <MenuRow key={sub.label} sub={sub} onNavigate={() => setOpenMenu(null)} />
                       ))}
+
+                      {item.footer && (
+                        <a
+                          href={item.footer.href}
+                          onClick={() => setOpenMenu(null)}
+                          className="mt-1 flex items-center justify-between gap-3 rounded-xl border-t border-slate-100 px-3 py-3 text-sm font-semibold text-brand-600 transition-colors hover:bg-brand-50"
+                        >
+                          <span className="flex items-center gap-2.5">
+                            <ServiceIcon name={item.footer.icon} className="h-4 w-4" />
+                            {item.footer.label}
+                          </span>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </a>
+                      )}
                     </div>
                   </div>
                 )}
@@ -192,6 +302,46 @@ export function Header() {
   );
 }
 
+/**
+ * A single dropdown row. The icon tile sits on a soft tint and fades into the
+ * lane's full gradient on hover, so the menu reads as six distinct services
+ * rather than six identical blue squares.
+ */
+function MenuRow({ sub, onNavigate }: { sub: SubItem; onNavigate: () => void }) {
+  const a = ACCENTS[sub.accent ?? "brand"];
+  return (
+    <a
+      href={sub.href}
+      onClick={onNavigate}
+      className="group flex items-center gap-3.5 rounded-xl p-2.5 transition-colors hover:bg-slate-50"
+    >
+      <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+        <span className={`absolute inset-0 ${a.soft}`} />
+        <span
+          className={`absolute inset-0 bg-gradient-to-br ${a.grad} opacity-0 transition-opacity duration-200 group-hover:opacity-100`}
+        />
+        <span className={`relative ${a.text} transition-colors duration-200 group-hover:text-white`}>
+          <ServiceIcon name={sub.icon} className="h-[1.15rem] w-[1.15rem]" />
+        </span>
+      </span>
+
+      <span className="min-w-0 flex-1">
+        <span className="block text-[13.5px] font-semibold leading-snug text-ink">{sub.label}</span>
+        {sub.desc && (
+          <span className="mt-0.5 block text-[11.5px] leading-snug text-slate-500">{sub.desc}</span>
+        )}
+      </span>
+
+      <svg
+        width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
+        className="shrink-0 -translate-x-1 text-slate-300 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:text-brand-500 group-hover:opacity-100"
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </a>
+  );
+}
+
 function MobileGroup({ item, onNavigate }: { item: NavItem; onNavigate: () => void }) {
   const [open, setOpen] = useState(false);
   if (!item.menu) {
@@ -218,94 +368,37 @@ function MobileGroup({ item, onNavigate }: { item: NavItem; onNavigate: () => vo
         </svg>
       </button>
       {open && (
-        <div className="ml-3 border-l border-slate-100 pl-3">
-          {item.menu.map((sub) => (
+        <div className="ml-2 space-y-0.5 border-l border-slate-100 pl-2">
+          {item.menu.map((sub) => {
+            const a = ACCENTS[sub.accent ?? "brand"];
+            return (
+              <a
+                key={sub.label}
+                href={sub.href}
+                onClick={onNavigate}
+                className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-slate-50"
+              >
+                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${a.soft}`}>
+                  <ServiceIcon name={sub.icon} className="h-4 w-4" />
+                </span>
+                <span className="text-sm font-medium text-slate-600">{sub.label}</span>
+              </a>
+            );
+          })}
+          {item.footer && (
             <a
-              key={sub.label}
-              href={sub.href}
+              href={item.footer.href}
               onClick={onNavigate}
-              className="block rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-700"
+              className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-50"
             >
-              {sub.label}
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-50">
+                <ServiceIcon name={item.footer.icon} className="h-4 w-4" />
+              </span>
+              {item.footer.label}
             </a>
-          ))}
+          )}
         </div>
       )}
     </div>
   );
 }
-
-const ICONS = {
-  spark: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 3v4M12 17v4M3 12h4M17 12h4" strokeLinecap="round" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-  wrench: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5 2.5-2.5Z" strokeLinejoin="round" />
-    </svg>
-  ),
-  trend: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M3 17l6-6 4 4 7-7M14 5h6v6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  bolt: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" strokeLinejoin="round" />
-    </svg>
-  ),
-  flow: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <circle cx="5" cy="6" r="2" /><circle cx="5" cy="18" r="2" /><circle cx="19" cy="12" r="2" />
-      <path d="M7 6h6a4 4 0 0 1 0 8H7" strokeLinecap="round" />
-    </svg>
-  ),
-  shield: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 3 5 6v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V6l-7-3Z" strokeLinejoin="round" />
-    </svg>
-  ),
-  ai: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="5" y="5" width="14" height="14" rx="3" /><path d="M9 9h6v6H9z" />
-    </svg>
-  ),
-  web: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18" />
-    </svg>
-  ),
-  app: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="m8 6-5 6 5 6M16 6l5 6-5 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  mobile: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="7" y="2" width="10" height="20" rx="2.5" /><path d="M11 18h2" strokeLinecap="round" />
-    </svg>
-  ),
-  team: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <circle cx="9" cy="8" r="3" /><path d="M4 20a5 5 0 0 1 10 0M15 6a3 3 0 0 1 0 6" strokeLinecap="round" />
-    </svg>
-  ),
-  grid: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="4" y="4" width="7" height="7" rx="1.8" /><rect x="13" y="4" width="7" height="7" rx="1.8" />
-      <rect x="4" y="13" width="7" height="7" rx="1.8" /><rect x="13" y="13" width="7" height="7" rx="1.8" />
-    </svg>
-  ),
-  blog: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="4" y="4" width="16" height="16" rx="2" /><path d="M8 9h8M8 13h5" strokeLinecap="round" />
-    </svg>
-  ),
-  folder: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" strokeLinejoin="round" />
-    </svg>
-  ),
-};

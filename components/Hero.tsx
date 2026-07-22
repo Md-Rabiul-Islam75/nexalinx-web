@@ -1,3 +1,4 @@
+import { HeroVideo } from "./HeroVideo";
 import { Reviews } from "./Reviews";
 
 export function Hero() {
@@ -6,18 +7,8 @@ export function Hero() {
       id="top"
       className="relative -mt-20 flex min-h-[88vh] flex-col overflow-hidden bg-ink text-white"
     >
-      {/* Full-bleed background video */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ filter: "brightness(1.45) contrast(1.06) saturate(1.1)" }}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-      >
-        <source src="/banner-intro.mp4" type="video/mp4" />
-      </video>
+      {/* Full-bleed background video — branding clip with a sound toggle */}
+      <HeroVideo />
 
       {/* Scrims for legibility — strong on the left, clear on the right so the video reads */}
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent" />
