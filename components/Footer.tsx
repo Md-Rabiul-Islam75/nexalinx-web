@@ -1,5 +1,6 @@
 import { Logo } from "./Logo";
 import { SERVICES } from "@/lib/services";
+import { SOLUTIONS } from "@/lib/solutions";
 
 type Column = { heading: string; links: { label: string; href: string }[] };
 
@@ -12,11 +13,18 @@ const COLUMNS: Column[] = [
     ],
   },
   {
+    heading: "Solutions",
+    links: [
+      ...SOLUTIONS.map((s) => ({ label: s.navLabel, href: `/solutions/${s.slug}` })),
+      { label: "All solutions", href: "/solutions" },
+    ],
+  },
+  {
     heading: "Company",
     links: [
-      { label: "How we work", href: "/#pillars" },
+      { label: "How we work", href: "/how-we-work" },
+      { label: "Why Nexalinx", href: "/why-nexalinx" },
       { label: "Success stories", href: "/success-stories" },
-      { label: "Why Nexalinx", href: "/#pillars" },
       { label: "Contact", href: "/#contact" },
     ],
   },
@@ -35,7 +43,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-ink text-slate-300">
       <div className="container-x py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)]">
           <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">

@@ -44,12 +44,20 @@ export function Pillars() {
               More accountable than freelancers, faster than enterprise agencies, and more
               production-ready than no-code prototypes.
             </p>
-            <a href="/book" className="btn-primary mt-8">
-              Talk to an engineer
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="/why-nexalinx" className="btn-primary">
+                Why Nexalinx
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+              <a
+                href="/how-we-work"
+                className="btn border border-white/20 bg-white/5 text-white hover:bg-white/10"
+              >
+                See how we work
+              </a>
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
