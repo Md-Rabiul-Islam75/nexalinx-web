@@ -1,6 +1,7 @@
 import { Logo } from "./Logo";
 import { SERVICES } from "@/lib/services";
 import { SOLUTIONS } from "@/lib/solutions";
+import { ARTICLES } from "@/lib/insights";
 
 type Column = { heading: string; links: { label: string; href: string }[] };
 
@@ -25,16 +26,20 @@ const COLUMNS: Column[] = [
       { label: "How we work", href: "/how-we-work" },
       { label: "Why Nexalinx", href: "/why-nexalinx" },
       { label: "Success stories", href: "/success-stories" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Ways to work with us", href: "/#offers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
-    heading: "Offers",
+    heading: "Insights",
     links: [
-      { label: "AI Opportunity Audit", href: "/#offers" },
-      { label: "UX Teardown", href: "/#offers" },
-      { label: "MVP Blueprint Sprint", href: "/#offers" },
-      { label: "White-label Partnership", href: "/services/dedicated-team-cto-support" },
+      { label: "Blog", href: "/insights" },
+      { label: "Founder resources", href: "/insights/resources" },
+      // The two most-read pieces, so the column links to real destinations
+      ...ARTICLES.slice(0, 2).map((a) => ({
+        label: a.navTitle,
+        href: `/insights/${a.slug}`,
+      })),
     ],
   },
 ];

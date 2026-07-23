@@ -6,6 +6,7 @@ import { Logo } from "./Logo";
 import { ServiceIcon } from "./ServiceIcon";
 import type { IconKey, Accent } from "@/lib/services";
 import { ACCENTS } from "@/lib/serviceTheme";
+import { ARTICLES, CATEGORY_META } from "@/lib/insights";
 
 type SubItem = {
   label: string;
@@ -145,20 +146,31 @@ const NAV: NavItem[] = [
       {
         label: "Blog",
         desc: "AI, MVP & product engineering notes",
-        href: "#",
+        href: "/insights",
         icon: "blog",
         accent: "brand",
       },
       {
         label: "Founder Resources",
         desc: "Guides, checklists & templates",
-        href: "#",
+        href: "/insights/resources",
         icon: "folder",
         accent: "violet",
       },
+      // Lead articles, so the menu offers a destination and not just a section
+      ...ARTICLES.slice(0, 2).map((a): SubItem => {
+        const meta = CATEGORY_META[a.category];
+        return {
+          label: a.navTitle,
+          desc: `${meta.label} · ${a.readingTime}`,
+          href: `/insights/${a.slug}`,
+          icon: "doc",
+          accent: meta.accent,
+        };
+      }),
     ],
   },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
