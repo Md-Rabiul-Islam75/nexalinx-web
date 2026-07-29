@@ -53,7 +53,7 @@ export function HeroVideo() {
         playsInline
         preload="metadata"
       >
-        <source src="/brand-intro-v2.mp4" type="video/mp4" />
+        <source src="/new_intro.mp4" type="video/mp4" />
       </video>
 
       <button
