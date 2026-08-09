@@ -28,9 +28,13 @@ const PILLARS = [
 
 export function Pillars() {
   return (
-    <section id="pillars" className="relative scroll-mt-24 overflow-hidden bg-navy-gradient py-20 text-white sm:py-28">
+    <section
+      id="pillars"
+      className="relative scroll-mt-24 overflow-hidden py-16 text-white sm:py-20"
+      style={{ background: "linear-gradient(180deg,#0B1E45 0%,#14336F 50%,#0B1E45 100%)" }}
+    >
       <div className="bg-grid absolute inset-0 opacity-[0.06]" />
-      <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-brand-500/25 blur-3xl" />
+      <div className="absolute -right-32 top-1/3 h-96 w-96 rounded-full bg-brand-500/25 blur-3xl" />
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div className="lg:sticky lg:top-28">

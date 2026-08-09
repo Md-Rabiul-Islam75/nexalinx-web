@@ -30,7 +30,7 @@ const CHIP: Record<string, string> = {
 
 export function RiskReversal() {
   return (
-    <section id="risk" className="scroll-mt-24 bg-slate-50/70 py-20 sm:py-28">
+    <section id="risk" className="scroll-mt-24 bg-slate-50/70 py-16 sm:py-20">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Risk reversal</span>

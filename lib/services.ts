@@ -52,6 +52,8 @@ export type Service = {
   intro: string;
   accent: Accent;
   icon: IconKey;
+  /** Card / hero background image (public path) */
+  image: string;
   /** Hero proof numbers */
   stats: { value: string; label: string }[];
   /** "What we can sell" — the concrete deliverables */
@@ -92,6 +94,7 @@ export const SERVICES: Service[] = [
       "Most AI projects stall at the prototype. We build production AI: grounded in your own data, connected to your existing tools, measured against a business number you actually care about.",
     accent: "brand",
     icon: "ai",
+    image: "/services/ai-development-automation.webp",
     stats: [
       { value: "−65%", label: "manual handling time" },
       { value: "92%", label: "answer accuracy on RAG" },
@@ -262,6 +265,7 @@ export const SERVICES: Service[] = [
       "A beautiful site that doesn't convert is an expensive brochure. We design around the buyer's decision path, write the copy that carries it, and build it fast enough to rank.",
     accent: "accent",
     icon: "web",
+    image: "/services/web-design-conversion.avif",
     stats: [
       { value: "+42%", label: "qualified leads" },
       { value: "95+", label: "Lighthouse score" },
@@ -432,6 +436,7 @@ export const SERVICES: Service[] = [
       "An MVP isn't a cheap version of your product — it's the smallest thing that proves someone will pay. We scope hard, build senior-led, and leave you with a codebase that survives version two.",
     accent: "violet",
     icon: "app",
+    image: "/services/web-app-saas-mvp.avif",
     stats: [
       { value: "8–14 wks", label: "idea to live MVP" },
       { value: "Weekly", label: "demos, no black box" },
@@ -602,6 +607,7 @@ export const SERVICES: Service[] = [
       "Shipping to the stores is the easy part. We build apps that survive real conditions — patchy networks, app review, device fragmentation and users who delete anything that feels slow.",
     accent: "indigo",
     icon: "mobile",
+    image: "/services/mobile-app-development.avif",
     stats: [
       { value: "4.8★", label: "typical store rating" },
       { value: "2", label: "platforms, one codebase" },
@@ -772,6 +778,7 @@ export const SERVICES: Service[] = [
       "Some products can't be learned on. Payments, custody, trading, health records and anything handling other people's money need engineers who have shipped it before — and who design for the failure case first.",
     accent: "emerald",
     icon: "shield",
+    image: "/services/critical-product-engineering.avif",
     stats: [
       { value: "0", label: "security incidents to date" },
       { value: "99.9%", label: "uptime targets met" },
@@ -942,6 +949,7 @@ export const SERVICES: Service[] = [
       "Hiring senior engineers takes months and a recruiter's fee. We give you a vetted team with overlapping US and EU hours, a tech lead who is accountable for delivery, and the option to run entirely under your brand.",
     accent: "amber",
     icon: "team",
+    image: "/services/dedicated-team-cto-support.avif",
     stats: [
       { value: "2 wks", label: "to a working team" },
       { value: "4–6 hrs", label: "US/EU overlap daily" },

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type Cat = "web" | "mobile" | "ai";
@@ -10,6 +11,7 @@ type Study = {
   client: string;
   category: Cat;
   summary: string;
+  image: string;
   hero: { value: string; label: string };
   metrics: { value: string; label: string }[];
   tech: string[];
@@ -56,50 +58,82 @@ const CAT_META: Record<
 
 const STUDIES: Study[] = [
   {
-    title: "AutoMarket — car marketplace platform",
-    client: "Automotive marketplace · USA",
+    title: "E-commerce Web Platform",
+    client: "Retail · commerce",
     category: "web",
     summary:
-      "A high-performance marketplace with financing calculator, dealer tools and 120k+ live listings.",
-    hero: { value: "+42%", label: "qualified leads" },
+      "A responsive storefront and catalogue that renders fast across desktop, tablet and mobile with a clean product-management back office.",
+    image: "/work/ecommerce.webp",
+    hero: { value: "+38%", label: "conversion" },
     metrics: [
-      { value: "1.4s", label: "load time" },
-      { value: "120k", label: "listings" },
+      { value: "1.6s", label: "load time" },
+      { value: "3", label: "device layouts" },
     ],
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
+    tech: ["Next.js", "Node.js", "Stripe"],
   },
   {
-    title: "Canvas — collaborative design studio",
-    client: "Design SaaS · EU",
+    title: "Gateoria — Event Planning Platform",
+    client: "Events · SaaS",
     category: "web",
     summary:
-      "A real-time, multiplayer canvas editor with WebGL rendering and offline-safe sync.",
-    hero: { value: "60fps", label: "canvas render" },
+      "An end-to-end event planning web app with scheduling, vendor coordination, ticketing and a real-time attendee dashboard.",
+    image: "/work/event-gateoria.avif",
+    hero: { value: "12k", label: "events run" },
     metrics: [
-      { value: "25k", label: "active users" },
       { value: "99.9%", label: "uptime" },
+      { value: "-40%", label: "planning time" },
     ],
-    tech: ["React", "WebGL", "WebSocket"],
+    tech: ["Next.js", "PostgreSQL", "Stripe"],
   },
   {
-    title: "InsightHub — B2B analytics portal",
-    client: "SaaS · USA",
+    title: "CRM Platform",
+    client: "B2B · sales ops",
     category: "web",
     summary:
-      "A data-heavy reporting portal with 40+ integrations and self-serve dashboards.",
-    hero: { value: "-70%", label: "report time" },
+      "A pipeline-first CRM with contacts, deals, tasks and permissions — replacing a tangle of spreadsheets for a growing sales team.",
+    image: "/work/crm.webp",
+    hero: { value: "+27%", label: "close rate" },
     metrics: [
-      { value: "40+", label: "integrations" },
-      { value: "5M", label: "rows / query" },
+      { value: "50k", label: "records" },
+      { value: "Role-based", label: "access" },
     ],
-    tech: ["Next.js", "Python", "ClickHouse"],
+    tech: ["React", "NestJS", "PostgreSQL"],
   },
   {
-    title: "Crypto wallet & trading app",
+    title: "CRM — Sales Dashboard",
+    client: "B2B · analytics",
+    category: "web",
+    summary:
+      "A reporting layer over the CRM: live sales dashboards, forecasting and self-serve charts the team can build without a developer.",
+    image: "/work/crm2.webp",
+    hero: { value: "-65%", label: "report time" },
+    metrics: [
+      { value: "Real-time", label: "dashboards" },
+      { value: "20+", label: "chart types" },
+    ],
+    tech: ["React", "Node.js", "ClickHouse"],
+  },
+  {
+    title: "HealthFix — Web & App",
+    client: "Healthcare · USA",
+    category: "web",
+    summary:
+      "A patient-facing web portal and companion app for appointments, records and reminders on a privacy-first backend.",
+    image: "/work/healthfix.avif",
+    hero: { value: "4.7★", label: "patient rating" },
+    metrics: [
+      { value: "HIPAA", label: "conscious" },
+      { value: "-45%", label: "no-shows" },
+    ],
+    tech: ["Next.js", "React Native", "Node.js"],
+  },
+  {
+    title: "Crypto Wallet & Trading App",
     client: "Fintech / crypto · USA",
     category: "mobile",
     summary:
-      "A secure Bitcoin/crypto wallet with real-time trading, biometric auth and hardware-grade security.",
+      "A secure Bitcoin/crypto wallet with real-time trading, biometric auth and hardware-grade key handling.",
+    image: "/work/crypto-wallet.avif",
     hero: { value: "4.8★", label: "app store rating" },
     metrics: [
       { value: "80k+", label: "downloads" },
@@ -108,24 +142,12 @@ const STUDIES: Study[] = [
     tech: ["React Native", "Rust", "WebSocket"],
   },
   {
-    title: "RouteOne — logistics driver app",
-    client: "Logistics · EU",
-    category: "mobile",
-    summary:
-      "An offline-first delivery & routing app with live tracking and automatic sync on reconnect.",
-    hero: { value: "+30%", label: "on-time delivery" },
-    metrics: [
-      { value: "100%", label: "offline capable" },
-      { value: "12k", label: "daily routes" },
-    ],
-    tech: ["Flutter", "Firebase", "Maps SDK"],
-  },
-  {
-    title: "CareConnect — health & booking app",
+    title: "CareConnect — Health & Booking App",
     client: "Healthcare · USA",
     category: "mobile",
     summary:
-      "Appointment booking plus telehealth video, reminders and a HIPAA-ready backend.",
+      "Appointment booking plus telehealth video, reminders and a HIPAA-ready backend in one patient app.",
+    image: "/work/careconnect.webp",
     hero: { value: "4.7★", label: "patient rating" },
     metrics: [
       { value: "HIPAA", label: "compliant" },
@@ -134,43 +156,32 @@ const STUDIES: Study[] = [
     tech: ["React Native", "Node.js", "WebRTC"],
   },
   {
-    title: "DocuMind — AI document assistant",
-    client: "Operations SaaS · EU",
+    title: "Outreaq — AI Support for CRM",
+    client: "Operations SaaS",
     category: "ai",
     summary:
-      "A RAG knowledge base over company documents that answers staff questions with citations.",
-    hero: { value: "92%", label: "answer accuracy" },
+      "An AI support assistant wired into the CRM that drafts replies, surfaces the right record and answers staff questions with citations.",
+    image: "/work/crm-outreaq.avif",
+    hero: { value: "-65%", label: "support time" },
     metrics: [
-      { value: "-65%", label: "support time" },
-      { value: "1.2M", label: "docs indexed" },
+      { value: "92%", label: "answer accuracy" },
+      { value: "24/7", label: "coverage" },
     ],
     tech: ["Python", "LangChain", "pgvector"],
   },
   {
-    title: "FlowOps — AI workflow automation",
-    client: "Finance operations · USA",
+    title: "Visa Agent Platform",
+    client: "Travel · immigration",
     category: "ai",
     summary:
-      "OCR + AI pipeline that reads, classifies and routes invoices and documents automatically.",
-    hero: { value: "-80%", label: "manual work" },
+      "An AI agent that reads documents, checks eligibility and guides applicants through visa workflows with human-in-the-loop review.",
+    image: "/work/visa-agent.avif",
+    hero: { value: "-70%", label: "processing time" },
     metrics: [
-      { value: "10k", label: "docs / day" },
-      { value: "99.2%", label: "extraction rate" },
+      { value: "OCR", label: "+ document AI" },
+      { value: "Human", label: "in the loop" },
     ],
-    tech: ["Python", "OCR", "LLM agents"],
-  },
-  {
-    title: "Recommend AI — personalization engine",
-    client: "E-commerce · EU",
-    category: "ai",
-    summary:
-      "A real-time recommendation engine driving personalized product discovery at checkout.",
-    hero: { value: "+28%", label: "avg. order value" },
-    metrics: [
-      { value: "<50ms", label: "inference" },
-      { value: "+18%", label: "repeat rate" },
-    ],
-    tech: ["Python", "Vector DB", "Ranking ML"],
+    tech: ["Python", "LLM agents", "OCR"],
   },
 ];
 
@@ -242,17 +253,25 @@ function StudyCard({ study: s }: { study: Study }) {
   const meta = CAT_META[s.category];
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
-      {/* Cover */}
-      <div className={`relative h-44 bg-gradient-to-br ${meta.grad} p-5`}>
-        <div className="bg-grid absolute inset-0 opacity-20" />
-        <div className="relative flex items-start justify-between">
-          <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+      {/* Cover — real project image with a dark scrim for legibility */}
+      <div className="relative h-44 overflow-hidden">
+        <Image
+          src={s.image}
+          alt={s.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/35 to-navy-950/10" />
+
+        <div className="relative flex items-start justify-between p-5">
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/20 backdrop-blur">
             {meta.label}
           </span>
-          <span className="text-white/80">{meta.icon}</span>
+          <span className="text-white/85">{meta.icon}</span>
         </div>
         <div className="absolute bottom-5 left-5">
-          <p className="font-display text-4xl font-extrabold text-white">{s.hero.value}</p>
+          <p className="font-display text-3xl font-extrabold text-white">{s.hero.value}</p>
           <p className="text-xs font-medium text-white/80">{s.hero.label}</p>
         </div>
       </div>

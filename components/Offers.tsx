@@ -84,21 +84,21 @@ const OFFERS: Offer[] = [
   },
 ];
 
-const BAR: Record<Color, string> = {
-  emerald: "from-emerald-400 to-emerald-500",
-  sky: "from-sky-400 to-sky-500",
-  violet: "from-violet-400 to-violet-500",
-  accent: "from-accent-400 to-accent-500",
-  brand: "from-brand-400 to-brand-500",
-  indigo: "from-indigo-400 to-indigo-500",
+const HEADER: Record<Color, string> = {
+  emerald: "from-emerald-500 to-teal-600",
+  sky: "from-sky-500 to-blue-600",
+  violet: "from-violet-500 to-indigo-600",
+  accent: "from-accent-500 to-brand-600",
+  brand: "from-brand-500 to-violet-600",
+  indigo: "from-indigo-500 to-violet-600",
 };
-const ICON_SOFT: Record<Color, string> = {
-  emerald: "bg-emerald-50 text-emerald-600",
-  sky: "bg-sky-50 text-sky-600",
-  violet: "bg-violet-100 text-violet-600",
-  accent: "bg-accent-50 text-accent-600",
-  brand: "bg-brand-50 text-brand-600",
-  indigo: "bg-indigo-50 text-indigo-600",
+const TEXT: Record<Color, string> = {
+  emerald: "text-emerald-600",
+  sky: "text-sky-600",
+  violet: "text-violet-600",
+  accent: "text-accent-600",
+  brand: "text-brand-600",
+  indigo: "text-indigo-600",
 };
 const CHIP: Record<Color, string> = {
   emerald: "bg-emerald-50 text-emerald-700",
@@ -121,7 +121,7 @@ export function Offers() {
   return (
     <section
       id="offers"
-      className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-brand-50/50 py-20 sm:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white py-16 sm:py-20"
     >
       <div className="absolute -left-40 top-24 -z-0 h-96 w-96 rounded-full bg-brand-gradient-soft blur-3xl" />
       <div className="absolute -right-40 bottom-24 -z-0 h-96 w-96 rounded-full bg-accent-500/5 blur-3xl" />
@@ -138,9 +138,9 @@ export function Offers() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {OFFERS.map((o) => (
-            <OfferCard key={o.name} offer={o} />
+        <div className="mt-16 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {OFFERS.map((o, i) => (
+            <OfferCard key={o.name} offer={o} index={i} />
           ))}
         </div>
 
@@ -158,106 +158,123 @@ export function Offers() {
   );
 }
 
-function OfferCard({ offer: o }: { offer: Offer }) {
-  if (o.featured) return <FeaturedCard offer={o} />;
+function OfferCard({ offer: o, index }: { offer: Offer; index: number }) {
+  if (o.featured) return <FeaturedCard offer={o} index={index} />;
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-2 hover:shadow-soft sm:p-8">
-      <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${BAR[o.color]}`} />
-
-      <div className="flex items-center justify-between">
-        <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${CHIP[o.color]}`}>
+    <article className="group flex flex-col overflow-hidden rounded-[1.4rem] border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-2 hover:shadow-soft">
+      {/* Gradient header band */}
+      <div className={`relative h-24 overflow-hidden bg-gradient-to-br ${HEADER[o.color]}`}>
+        <div className="bg-grid absolute inset-0 opacity-20" />
+        <div className="absolute -right-6 -top-8 h-24 w-24 rounded-full bg-white/15 blur-2xl" />
+        <span className="absolute left-5 top-4 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white backdrop-blur">
           {o.stage}
         </span>
-        <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{o.model}</span>
+        <span className="absolute right-5 top-4 font-display text-3xl font-extrabold text-white/25">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
-      <div className={`mt-6 flex h-14 w-14 items-center justify-center rounded-2xl ${ICON_SOFT[o.color]}`}>
-        {ICONS[o.icon]}
+      {/* Floating icon badge on the seam */}
+      <div className="relative px-7">
+        <div
+          className={`absolute -top-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-slate-700 shadow-lg ring-1 ring-slate-100 transition-transform duration-300 group-hover:scale-110 ${TEXT[o.color]}`}
+        >
+          {ICONS[o.icon]}
+        </div>
       </div>
 
-      <h3 className="mt-5 font-display text-xl font-bold text-ink">{o.name}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-500">{o.desc}</p>
+      {/* Body */}
+      <div className="flex flex-1 flex-col px-7 pb-7 pt-9">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-xl font-bold text-ink">{o.name}</h3>
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-slate-500">{o.desc}</p>
 
-      <ul className="mt-6 flex-1 space-y-3 border-t border-slate-100 pt-6">
-        {o.points.map((p) => (
-          <li key={p} className="flex items-start gap-2.5 text-sm text-slate-600">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-500">
-              <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {p}
-          </li>
-        ))}
-      </ul>
+        <ul className="mt-5 flex-1 space-y-3 border-t border-slate-100 pt-5">
+          {o.points.map((p) => (
+            <li key={p} className="flex items-start gap-2.5 text-sm text-slate-600">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-500">
+                <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
 
-      <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-slate-500">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-brand-500">
-          <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        {o.meta}
+        <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={TEXT[o.color]}>
+            <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          {o.meta}
+        </div>
+
+        <a
+          href="/book"
+          className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${CTA_SOFT[o.color]}`}
+        >
+          {o.cta}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
       </div>
-
-      <a
-        href="/book"
-        className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${CTA_SOFT[o.color]}`}
-      >
-        {o.cta}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-          <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
     </article>
   );
 }
 
-function FeaturedCard({ offer: o }: { offer: Offer }) {
+function FeaturedCard({ offer: o, index }: { offer: Offer; index: number }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-3xl bg-navy-gradient p-7 text-white shadow-glow ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 sm:p-8 lg:-my-2">
-      <div className="bg-grid absolute inset-0 opacity-[0.07]" />
-      <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-accent-500/25 blur-3xl" />
-      <span className="absolute right-6 top-6 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink shadow-glow">
-        Most popular
-      </span>
-
-      <div className="relative flex items-center justify-between pr-24">
-        <span className="rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-          {o.stage}
+    <article className="group relative flex flex-col overflow-hidden rounded-[1.4rem] shadow-glow ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 lg:-my-2">
+      {/* Full navy body */}
+      <div className="relative flex flex-1 flex-col bg-navy-gradient p-7 text-white sm:p-8">
+        <div className="bg-grid absolute inset-0 opacity-[0.08]" />
+        <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-accent-500/30 blur-3xl" />
+        <span className="absolute right-6 top-6 font-display text-4xl font-extrabold text-white/10">
+          {String(index + 1).padStart(2, "0")}
         </span>
+
+        <div className="relative">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink shadow-glow">
+            <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+            Most popular
+          </span>
+
+          <div className="mt-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-110">
+            {ICONS[o.icon]}
+          </div>
+
+          <h3 className="mt-5 font-display text-xl font-bold">{o.name}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate-300">{o.desc}</p>
+        </div>
+
+        <ul className="relative mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
+          {o.points.map((p) => (
+            <li key={p} className="flex items-start gap-2.5 text-sm text-slate-200">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-400">
+                <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {p}
+            </li>
+          ))}
+        </ul>
+
+        <div className="relative mt-6 flex items-center gap-1.5 text-xs font-semibold text-slate-300">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-400">
+            <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          {o.meta}
+        </div>
+
+        <a
+          href="/book"
+          className="relative mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-ink transition hover:bg-accent-400"
+        >
+          {o.cta}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
       </div>
-
-      <div className="relative mt-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-white">
-        {ICONS[o.icon]}
-      </div>
-
-      <h3 className="relative mt-5 font-display text-xl font-bold">{o.name}</h3>
-      <p className="relative mt-2 text-sm leading-relaxed text-slate-300">{o.desc}</p>
-
-      <ul className="relative mt-6 flex-1 space-y-3 border-t border-white/10 pt-6">
-        {o.points.map((p) => (
-          <li key={p} className="flex items-start gap-2.5 text-sm text-slate-200">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-400">
-              <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {p}
-          </li>
-        ))}
-      </ul>
-
-      <div className="relative mt-6 flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent-400">
-          <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        {o.meta}
-      </div>
-
-      <a
-        href="/book"
-        className="relative mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 px-5 py-3 text-sm font-semibold text-ink transition hover:bg-accent-400"
-      >
-        {o.cta}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-          <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
     </article>
   );
 }
