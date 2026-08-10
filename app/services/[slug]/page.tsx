@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { Header } from "@/components/Header";
@@ -92,29 +93,46 @@ export default async function ServicePage({ params }: Params) {
                 </div>
               </div>
 
-              {/* Deliverables preview card */}
-              <div className="relative rounded-3xl border border-white/10 bg-white/[0.05] p-7 backdrop-blur-sm">
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${a.grad} text-white shadow-glow`}
-                >
-                  <ServiceIcon name={service.icon} className="h-7 w-7" />
+              {/* Image banner + deliverables preview card */}
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] shadow-glow backdrop-blur-sm">
+                {/* Service image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    priority
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E45] via-[#0B1E45]/25 to-transparent" />
+                  {/* Icon badge sitting on the image */}
+                  <div
+                    className={`absolute bottom-4 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${a.grad} text-white shadow-glow`}
+                  >
+                    <ServiceIcon name={service.icon} className="h-6 w-6" />
+                  </div>
                 </div>
-                <p className="mt-5 font-display text-lg font-bold">{service.name}</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">{service.summary}</p>
 
-                <ul className="mt-6 space-y-2.5 border-t border-white/10 pt-6">
-                  {service.deliverables.slice(0, 4).map((d) => (
-                    <li key={d.title} className="flex items-start gap-2.5 text-sm text-slate-200">
-                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-400">
-                        <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      {d.title}
+                {/* Body */}
+                <div className="p-7">
+                  <p className="font-display text-lg font-bold">{service.name}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{service.summary}</p>
+
+                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
+                    {service.deliverables.slice(0, 4).map((d) => (
+                      <li key={d.title} className="flex items-start gap-2.5 text-sm text-slate-200">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-400">
+                          <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        {d.title}
+                      </li>
+                    ))}
+                    <li className="pt-1 text-sm font-semibold text-brand-200">
+                      + {service.deliverables.length - 4} more capabilities below
                     </li>
-                  ))}
-                  <li className="pt-1 text-sm font-semibold text-brand-200">
-                    + {service.deliverables.length - 4} more capabilities below
-                  </li>
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const CASES = [
   {
@@ -7,6 +8,7 @@ const CASES = [
     problem: "High-security wallet & transaction workflows with real-time data.",
     highlights: ["Secure backend", "Real-time data", "Complex API integration"],
     image: "/proof/crypto.webp",
+    href: "/success-stories/crypto-wallet-trading-app",
   },
   {
     tag: "AI · CRM",
@@ -14,13 +16,15 @@ const CASES = [
     problem: "An AI assistant wired into the CRM that drafts replies, surfaces the right record and answers staff questions with citations.",
     highlights: ["RAG knowledge base", "Drafts & suggestions", "Cited answers"],
     image: "/work/crm-outreaq.avif",
+    href: "/success-stories/outreaq-ai-support-crm",
   },
   {
-    tag: "Web / App",
-    title: "Critical web & app projects",
-    problem: "Mission-critical systems requiring reliability and clean handover.",
-    highlights: ["Scalable architecture", "QA & DevOps", "Documented delivery"],
-    image: "/proof/critical.avif",
+    tag: "Healthcare · Web & App",
+    title: "HealthFix — Web & App",
+    problem: "A patient-facing web portal and companion app for appointments, records and reminders on a privacy-first backend.",
+    highlights: ["Patient portal + app", "Automated reminders", "HIPAA-conscious"],
+    image: "/work/healthfix.avif",
+    href: "/success-stories/healthfix-web-and-app",
   },
 ];
 
@@ -46,8 +50,9 @@ export function Proof() {
 
         <div className="mt-14 grid gap-7 lg:grid-cols-3">
           {CASES.map((c) => (
-            <article
+            <Link
               key={c.title}
+              href={c.href}
               className="group flex flex-col overflow-hidden rounded-[1.4rem] border border-slate-100 bg-white shadow-card transition-all duration-300 hover:-translate-y-2 hover:shadow-soft"
             >
               {/* Image header with tag chip */}
@@ -81,8 +86,15 @@ export function Proof() {
                     </span>
                   ))}
                 </div>
+
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-all group-hover:gap-2.5">
+                  Read case study
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
