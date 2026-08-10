@@ -196,16 +196,14 @@ export const SERVICES: Service[] = [
       },
     ],
     tech: [
-      "Claude / OpenAI",
-      "LangChain",
-      "pgvector",
-      "Pinecone",
-      "Python",
-      "FastAPI",
+      "AI / LLM",
+      "RAG",
       "Node.js",
       "Next.js",
-      "Airflow",
-      "AWS Bedrock",
+      "React",
+      "Spring Boot",
+      "Java",
+      "PostgreSQL",
     ],
     packages: [
       {
@@ -369,14 +367,10 @@ export const SERVICES: Service[] = [
     tech: [
       "Next.js",
       "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Figma",
-      "Sanity",
-      "Contentful",
-      "WordPress",
-      "Webflow",
-      "Vercel",
+      "Laravel",
+      "PHP",
+      "Node.js",
+      "PostgreSQL",
     ],
     packages: [
       {
@@ -540,14 +534,10 @@ export const SERVICES: Service[] = [
     tech: [
       "Next.js",
       "React",
-      "TypeScript",
       "Node.js",
-      "NestJS",
-      "PostgreSQL",
       "Prisma",
-      "Stripe",
-      "AWS",
-      "Docker",
+      "Spring Boot",
+      "PostgreSQL",
     ],
     packages: [
       {
@@ -710,15 +700,11 @@ export const SERVICES: Service[] = [
     ],
     tech: [
       "React Native",
-      "Flutter",
-      "Expo",
-      "Swift",
-      "Kotlin",
-      "Firebase",
+      "React",
       "Node.js",
-      "Stripe",
-      "Maps SDK",
-      "Sentry",
+      "Spring Boot",
+      "Java",
+      "PostgreSQL",
     ],
     packages: [
       {
@@ -880,16 +866,12 @@ export const SERVICES: Service[] = [
       },
     ],
     tech: [
-      "Go",
-      "Rust",
+      "Java",
+      "Spring Boot",
       "Node.js",
-      "Python",
+      "Laravel",
+      "PHP",
       "PostgreSQL",
-      "Redis",
-      "Kafka",
-      "Kubernetes",
-      "Terraform",
-      "AWS / GCP",
     ],
     packages: [
       {
@@ -1051,16 +1033,16 @@ export const SERVICES: Service[] = [
       },
     ],
     tech: [
-      "React / Next.js",
+      "React",
+      "Next.js",
       "Node.js",
-      "Python",
+      "Java",
+      "Spring Boot",
+      "Laravel",
+      "PHP",
       "React Native",
-      "Flutter",
+      "Prisma",
       "PostgreSQL",
-      "AWS / Azure",
-      "Docker",
-      "Jira / Linear",
-      "GitHub Actions",
     ],
     packages: [
       {
