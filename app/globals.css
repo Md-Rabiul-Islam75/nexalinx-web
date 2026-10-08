@@ -30,6 +30,23 @@ body {
     box-shadow: 0 16px 40px -12px rgba(71, 195, 252, 0.55);
   }
 
+  /* The main "Book a call" button: brighter than btn-primary, with a pulsing
+     glow ring and a light sweep so it catches the eye on any background. */
+  .btn-glow {
+    @apply btn relative overflow-hidden text-ink hover:-translate-y-0.5 hover:brightness-105 focus-visible:ring-accent-400;
+    background: linear-gradient(135deg, #8BE4FF 0%, #4FD0FF 45%, #1FB4FF 100%);
+    animation: cta-pulse 2s ease-out infinite;
+  }
+  .btn-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.75) 50%, transparent 70%);
+    transform: translateX(-120%);
+    animation: cta-shine 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
   .btn-secondary {
     @apply btn bg-ink text-white hover:bg-ink-800 hover:-translate-y-0.5 focus-visible:ring-ink;
   }
@@ -52,6 +69,35 @@ body {
 
   .card {
     @apply rounded-2xl border border-slate-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft;
+  }
+}
+
+@keyframes cta-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 208, 255, 0.7), 0 14px 36px -10px rgba(71, 195, 252, 0.85);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(79, 208, 255, 0), 0 14px 36px -10px rgba(71, 195, 252, 0.85);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 208, 255, 0), 0 14px 36px -10px rgba(71, 195, 252, 0.85);
+  }
+}
+
+@keyframes cta-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-glow,
+  .btn-glow::after {
+    animation: none;
   }
 }
 

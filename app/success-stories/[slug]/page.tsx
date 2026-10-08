@@ -188,7 +188,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <p className="mt-4 text-lg text-slate-300">{s.solution_intro}</p>
             </div>
 
-            <ol className="mt-14 grid gap-6 md:grid-cols-3">
+            <ol className="mt-14 grid gap-6 lg:grid-cols-3">
               {s.solution_steps.map((step, i) => (
                 <li key={step.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
                   <span className="font-display text-sm font-bold text-brand-300">

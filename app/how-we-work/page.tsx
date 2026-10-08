@@ -45,11 +45,11 @@ export default function HowWeWorkPage() {
                 const a = ACCENTS[p.accent ?? "brand"];
                 const last = i === PHASES.length - 1;
                 return (
-                  <div key={p.step} className="relative flex gap-6 sm:gap-8">
+                  <div key={p.step} className="relative flex gap-4 sm:gap-8">
                     {/* Rail */}
                     <div className="relative flex shrink-0 flex-col items-center">
                       <span
-                        className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${a.grad} font-display text-sm font-bold text-white shadow-soft`}
+                        className={`flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br ${a.grad} font-display text-sm font-bold text-white shadow-soft sm:h-14 sm:w-14`}
                       >
                         {p.icon ? <ServiceIcon name={p.icon} className="h-6 w-6" /> : p.step}
                       </span>
@@ -63,7 +63,7 @@ export default function HowWeWorkPage() {
 
                     {/* Card */}
                     <article
-                      className={`mb-4 flex-1 rounded-2xl border border-slate-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft sm:p-7 ${
+                      className={`mb-4 flex-1 rounded-2xl border border-slate-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft sm:p-7 max-sm:p-5 ${
                         last ? "mb-0" : ""
                       }`}
                     >
@@ -153,7 +153,7 @@ export default function HowWeWorkPage() {
             {TOOLS.length > 0 && (
               <div className="mt-14 flex flex-col items-center gap-5 border-t border-white/10 pt-10 lg:flex-row lg:justify-between">
                 <p className="max-w-sm text-sm text-slate-300">
-                  <span className="font-semibold text-white">Full access, day one.</span> You
+                  <span className="font-semibold text-white">Full access, day one.</span>{" "}You
                   get a seat in every tool we use on your project — nothing happens somewhere
                   you can&apos;t see.
                 </p>

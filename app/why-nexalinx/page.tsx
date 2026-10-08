@@ -86,7 +86,41 @@ export default function WhyNexalinxPage() {
               intro="You're probably weighing a freelancer, a big agency and an AI builder. Here's where each genuinely wins — and where we do."
             />
 
-            <div className="mt-14 overflow-hidden rounded-[1.5rem] border border-slate-100 shadow-card">
+            {/* Phones & tablets: one card per criterion, Nexalinx first — a wide table
+                would push our own column off-screen */}
+            <div className="mt-12 grid gap-4 md:grid-cols-2 lg:hidden">
+              {COMPARISON.rows.map((row) => (
+                <div key={row.criterion} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-card">
+                  <h3 className="font-display text-base font-bold text-ink">{row.criterion}</h3>
+                  <dl className="mt-3 space-y-1">
+                    {[...COMPARISON.columns]
+                      .sort((x, y) => Number(!!y.highlight) - Number(!!x.highlight))
+                      .map((c) => (
+                        <div
+                          key={c.id}
+                          className={`flex items-start justify-between gap-4 rounded-xl px-3 py-2 text-sm ${
+                            c.highlight ? "bg-brand-50 font-semibold text-ink" : "text-slate-500"
+                          }`}
+                        >
+                          <dt className={c.highlight ? "text-brand-700" : "font-medium text-slate-400"}>
+                            {c.label}
+                          </dt>
+                          <dd className="flex items-start gap-1.5 text-right">
+                            {row.best === c.id && (
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0 text-accent-600" aria-label="Best">
+                                <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            )}
+                            {row.values[c.id] ?? "—"}
+                          </dd>
+                        </div>
+                      ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-14 hidden overflow-hidden rounded-[1.5rem] border border-slate-100 shadow-card lg:block">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[52rem] border-collapse text-left">
                   <thead>

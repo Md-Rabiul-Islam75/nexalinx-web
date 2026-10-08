@@ -126,7 +126,7 @@ export default async function SolutionPage({ params }: Params) {
               highlight="actually costs"
               intro="Every one of these gets more expensive the longer it runs. That's the whole argument for acting this quarter rather than next."
             />
-            <div className="mt-14 grid gap-5 md:grid-cols-3">
+            <div className="mt-14 grid gap-5 lg:grid-cols-3">
               {s.cost.map((c) => (
                 <article
                   key={c.title}

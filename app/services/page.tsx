@@ -54,7 +54,7 @@ export default function ServicesIndexPage() {
             <dl className="mt-12 grid max-w-3xl grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-4">
               {STATS.map((s) => (
                 <div key={s.label}>
-                  <dt className="font-display text-3xl font-bold text-white">{s.value}</dt>
+                  <dt className="whitespace-nowrap font-display text-2xl font-bold text-white lg:text-3xl">{s.value}</dt>
                   <dd className="mt-1 text-xs text-slate-400">{s.label}</dd>
                 </div>
               ))}

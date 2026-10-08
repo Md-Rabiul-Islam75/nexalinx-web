@@ -118,7 +118,7 @@ export default function ContactPage() {
 
         {/* Channels */}
         <section className="bg-white py-16 sm:py-20">
-          <div className="container-x grid gap-5 md:grid-cols-3">
+          <div className="container-x grid gap-5 lg:grid-cols-3">
             {CHANNELS.map((c) => {
               const a = ACCENTS[c.accent];
               const external = c.href.startsWith("mailto:");

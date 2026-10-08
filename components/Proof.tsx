@@ -43,7 +43,7 @@ export function Proof() {
               Full, metric-backed case studies are being published — here&apos;s a snapshot.
             </p>
           </div>
-          <span className="rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-500">
+          <span className="shrink-0 whitespace-nowrap rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-500">
             Detailed case studies in progress
           </span>
         </div>

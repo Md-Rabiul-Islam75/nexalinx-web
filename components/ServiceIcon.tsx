@@ -219,6 +219,24 @@ const PATHS: Record<IconKey, React.ReactNode> = {
       <path d="M9.1 15.3 7 17.2v3l2.8-1.4M14.9 15.3 17 17.2v3l-2.8-1.4" strokeLinecap="round" strokeLinejoin="round" />
     </>
   ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m3.5 7 8.5 6 8.5-6" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+  alert: (
+    <>
+      <path d="M10.3 4.2 2.8 17.5A2 2 0 0 0 4.5 20.5h15a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z" strokeLinejoin="round" />
+      <path d="M12 9.5v4M12 17h.01" strokeLinecap="round" />
+    </>
+  ),
 };
 
 export function ServiceIcon({

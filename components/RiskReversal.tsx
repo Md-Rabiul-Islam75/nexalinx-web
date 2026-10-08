@@ -44,7 +44,7 @@ export function RiskReversal() {
 
         {/* Guarantee panel */}
         <div className="mt-14 overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white shadow-soft">
-          <div className="grid lg:grid-cols-[0.85fr_1.4fr]">
+          <div className="grid xl:grid-cols-[0.85fr_1.4fr]">
             {/* Left — statement */}
             <div className="relative overflow-hidden bg-navy-gradient p-8 text-white sm:p-10">
               <div className="bg-grid absolute inset-0 opacity-[0.07]" />
@@ -64,8 +64,8 @@ export function RiskReversal() {
                   <span className="h-2 w-2 rounded-full bg-accent-500" />
                   Milestone-based · cancel-safe
                 </div>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <a href="/book" className="btn-primary">
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a href="/book" className="btn-primary whitespace-nowrap">
                     Book a Discovery Call
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                       <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
@@ -73,7 +73,7 @@ export function RiskReversal() {
                   </a>
                   <a
                     href="/how-we-work#guarantees"
-                    className="btn border border-white/20 bg-white/5 text-white hover:bg-white/10"
+                    className="btn whitespace-nowrap border border-white/20 bg-white/5 text-white hover:bg-white/10"
                   >
                     See the full process
                   </a>

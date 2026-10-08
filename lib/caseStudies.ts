@@ -56,7 +56,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "1.6s", label: "load time" },
       { value: "3", label: "device layouts" },
     ],
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
+    tech: ["Next.js", "Node.js", "Spring Boot", "PostgreSQL"],
     client_who:
       "A growing online retailer selling homeware across several categories, running on an off-the-shelf template store that had stopped keeping up with the business.",
     client_facts: [
@@ -107,7 +107,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "99.9%", label: "uptime" },
       { value: "-40%", label: "planning time" },
     ],
-    tech: ["Next.js", "Prisma", "PostgreSQL"],
+    tech: ["Next.js", "Prisma", "Spring Boot", "PostgreSQL"],
     client_who:
       "An events startup building Gateoria — a SaaS to give organisers a single place to plan and run events end to end.",
     client_facts: [
@@ -209,7 +209,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "Real-time", label: "dashboards" },
       { value: "20+", label: "chart types" },
     ],
-    tech: ["React", "Node.js", "PostgreSQL"],
+    tech: ["React", "Node.js", "Spring Boot", "PostgreSQL"],
     client_who:
       "The same sales organisation, now sitting on rich CRM data but unable to turn it into decisions quickly.",
     client_facts: [
@@ -260,7 +260,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "HIPAA", label: "conscious" },
       { value: "-45%", label: "no-shows" },
     ],
-    tech: ["Next.js", "Laravel", "PostgreSQL"],
+    tech: ["Next.js", "Laravel", "Spring Boot", "PostgreSQL"],
     client_who:
       "A US healthcare provider that wanted a proper digital front door for its patients, across both web and mobile.",
     client_facts: [
@@ -362,7 +362,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "HIPAA", label: "compliant" },
       { value: "-45%", label: "no-shows" },
     ],
-    tech: ["React Native", "Node.js", "PostgreSQL"],
+    tech: ["React Native", "Node.js", "Spring Boot", "PostgreSQL"],
     client_who:
       "A US clinic network that wanted to meet patients on their phones — for booking and for care itself.",
     client_facts: [
@@ -413,7 +413,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "92%", label: "answer accuracy" },
       { value: "24/7", label: "coverage" },
     ],
-    tech: ["AI / LLM", "Node.js", "PostgreSQL"],
+    tech: ["AI / LLM", "Node.js", "Spring Boot", "PostgreSQL"],
     client_who:
       "An operations SaaS whose support team was drowning in repetitive questions and slow lookups.",
     client_facts: [
@@ -464,7 +464,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "OCR", label: "+ document AI" },
       { value: "Human", label: "in the loop" },
     ],
-    tech: ["AI / LLM", "Laravel", "PostgreSQL"],
+    tech: ["AI / LLM", "Laravel", "Spring Boot", "PostgreSQL"],
     client_who:
       "An immigration service processing visa applications by hand, document by document.",
     client_facts: [

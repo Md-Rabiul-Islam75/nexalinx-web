@@ -177,7 +177,11 @@ const NAV: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Header() {
+/**
+ * `light` — the page opens on a light hero, so the bar keeps dark text even
+ * before the visitor scrolls (the default assumes a dark hero underneath).
+ */
+export function Header({ light = false }: { light?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -190,7 +194,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const dark = !scrolled && !mobileOpen; // white text over the dark hero
+  const dark = !light && !scrolled && !mobileOpen; // white text over the dark hero
   const openWith = (label: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpenMenu(label);
@@ -214,7 +218,7 @@ export function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center lg:flex xl:gap-1">
           {NAV.map((item) =>
             item.menu ? (
               <div
@@ -228,7 +232,7 @@ export function Header() {
                   href={item.href}
                   onFocus={() => openWith(item.label)}
                   onClick={() => setOpenMenu(null)}
-                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium xl:px-3.5 transition-colors ${
                     dark ? "text-white/85 hover:text-white" : "text-slate-600 hover:text-brand-600"
                   }`}
                   aria-haspopup="true"
@@ -279,7 +283,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                className={`whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium transition-colors xl:px-3.5 ${
                   dark ? "text-white/85 hover:text-white" : "text-slate-600 hover:text-brand-600"
                 }`}
               >
@@ -290,8 +294,10 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <a href="/book" className="btn-primary">
-            Book a Discovery Call
+          {/* Short label on small laptops so the bar never wraps */}
+          <a href="/book" className="btn-glow whitespace-nowrap">
+            <span className="xl:hidden">Book a Call</span>
+            <span className="hidden xl:inline">Book a Discovery Call</span>
           </a>
         </div>
 
@@ -321,7 +327,7 @@ export function Header() {
             {NAV.map((item) => (
               <MobileGroup key={item.label} item={item} onNavigate={() => setMobileOpen(false)} />
             ))}
-            <a href="/book" onClick={() => setMobileOpen(false)} className="btn-primary mt-3 w-full">
+            <a href="/book" onClick={() => setMobileOpen(false)} className="btn-glow mt-3 w-full">
               Book a Discovery Call
             </a>
           </div>

@@ -34,7 +34,10 @@ export type IconKey =
   | "grid"
   | "blog"
   | "folder"
-  | "rocket";
+  | "rocket"
+  | "clock"
+  | "mail"
+  | "alert";
 
 export type Accent = "brand" | "accent" | "violet" | "emerald" | "indigo" | "amber";
 
@@ -55,7 +58,7 @@ export type Service = {
   /** Card / hero background image (public path) */
   image: string;
   /** Hero proof numbers */
-  stats: { value: string; label: string }[];
+  stats: { value: string; label: string; icon: IconKey }[];
   /** "What we can sell" — the concrete deliverables */
   deliverables: { title: string; desc: string; icon: IconKey }[];
   /** "Best customer" — who this lane is built for */
@@ -76,6 +79,20 @@ export type Service = {
     featured?: boolean;
   }[];
   faqs: { q: string; a: string }[];
+  /** "The challenge" — the pain this lane removes, in the buyer's words */
+  challenge: {
+    title: [string, string];
+    desc: string;
+    pains: { title: string; desc: string; icon: IconKey }[];
+  };
+  /** "How it works" diagram — what comes in, what we build, what comes out */
+  flow: {
+    inputs: { label: string; icon: IconKey }[];
+    core: { title: string; desc: string };
+    outputs: { label: string; icon: IconKey }[];
+  };
+  /** Case-study slug shown as this lane's success story */
+  caseStudy: string;
   /** Slugs of related lanes */
   related: string[];
 };
@@ -96,10 +113,10 @@ export const SERVICES: Service[] = [
     icon: "ai",
     image: "/services/ai-development-automation.webp",
     stats: [
-      { value: "−65%", label: "manual handling time" },
-      { value: "92%", label: "answer accuracy on RAG" },
-      { value: "4–10 wks", label: "typical first release" },
-      { value: "100%", label: "your data stays yours" },
+      { value: "−65%", label: "manual handling time", icon: "trend" },
+      { value: "92%", label: "answer accuracy on RAG", icon: "check" },
+      { value: "4–10 wks", label: "typical first release", icon: "clock" },
+      { value: "100%", label: "your data stays yours", icon: "lock" },
     ],
     deliverables: [
       {
@@ -247,6 +264,43 @@ export const SERVICES: Service[] = [
         a: "Yes — CRM, ERP, helpdesk, data warehouse, internal APIs and legacy databases. Integration is the majority of most AI projects, and it's where senior engineering pays for itself.",
       },
     ],
+    challenge: {
+      title: ["Too much time lost", "on repetitive work?"],
+      desc: "Manual data entry, slow replies and tools that don't talk to each other hold your team back and quietly raise your operating costs.",
+      pains: [
+        {
+          title: "Scattered information",
+          desc: "Important data is spread across email, documents and different systems.",
+          icon: "folder",
+        },
+        {
+          title: "Manual, repetitive tasks",
+          desc: "Your team spends hours on copy-paste work that could run on its own.",
+          icon: "clock",
+        },
+        {
+          title: "Slow response times",
+          desc: "Customers and staff wait for answers that already exist somewhere.",
+          icon: "chat",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "Website inquiry", icon: "web" },
+        { label: "Email request", icon: "mail" },
+        { label: "Chat message", icon: "chat" },
+        { label: "Document upload", icon: "doc" },
+      ],
+      core: { title: "AI Agent", desc: "Understands, searches and acts" },
+      outputs: [
+        { label: "Sends a response", icon: "bolt" },
+        { label: "Creates a ticket", icon: "layers" },
+        { label: "Updates your CRM", icon: "sync" },
+        { label: "Notifies your team", icon: "bell" },
+      ],
+    },
+    caseStudy: "outreaq-ai-support-crm",
     related: ["web-app-saas-mvp", "critical-product-engineering", "dedicated-team-cto-support"],
   },
 
@@ -265,10 +319,10 @@ export const SERVICES: Service[] = [
     icon: "web",
     image: "/services/web-design-conversion.avif",
     stats: [
-      { value: "+42%", label: "qualified leads" },
-      { value: "95+", label: "Lighthouse score" },
-      { value: "1.4s", label: "typical load time" },
-      { value: "3–6 wks", label: "design to launch" },
+      { value: "+42%", label: "qualified leads", icon: "trend" },
+      { value: "95+", label: "Lighthouse score", icon: "gauge" },
+      { value: "1.4s", label: "typical load time", icon: "bolt" },
+      { value: "3–6 wks", label: "design to launch", icon: "clock" },
     ],
     deliverables: [
       {
@@ -370,6 +424,8 @@ export const SERVICES: Service[] = [
       "Laravel",
       "PHP",
       "Node.js",
+      "Spring Boot",
+      "Java",
       "PostgreSQL",
     ],
     packages: [
@@ -414,6 +470,43 @@ export const SERVICES: Service[] = [
         a: "We'll build on it. If you have Figma files or a brand system we implement it faithfully and extend it where pages need components the system doesn't cover yet.",
       },
     ],
+    challenge: {
+      title: ["A website that looks fine", "but doesn't sell?"],
+      desc: "Plenty of visitors, too few enquiries. Slow pages, unclear messaging and weak SEO turn paid and organic traffic into bounces.",
+      pains: [
+        {
+          title: "Slow, heavy pages",
+          desc: "Every extra second of load time loses visitors before they read a word.",
+          icon: "gauge",
+        },
+        {
+          title: "An unclear message",
+          desc: "Visitors can't tell what you do, who it's for, or what to do next.",
+          icon: "pen",
+        },
+        {
+          title: "Invisible in search",
+          desc: "Weak technical SEO hands competitors the clicks you should be getting.",
+          icon: "search",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "Google search", icon: "search" },
+        { label: "Paid ads", icon: "trend" },
+        { label: "Social & referrals", icon: "users" },
+        { label: "Email campaigns", icon: "mail" },
+      ],
+      core: { title: "Conversion website", desc: "Fast, clear and built to convert" },
+      outputs: [
+        { label: "Qualified leads", icon: "check" },
+        { label: "Booked calls", icon: "chat" },
+        { label: "CRM entries", icon: "sync" },
+        { label: "Analytics insight", icon: "chart" },
+      ],
+    },
+    caseStudy: "ecommerce-web-platform",
     related: ["web-app-saas-mvp", "ai-development-automation", "dedicated-team-cto-support"],
   },
 
@@ -432,10 +525,10 @@ export const SERVICES: Service[] = [
     icon: "app",
     image: "/services/web-app-saas-mvp.avif",
     stats: [
-      { value: "8–14 wks", label: "idea to live MVP" },
-      { value: "Weekly", label: "demos, no black box" },
-      { value: "100%", label: "code & IP yours" },
-      { value: "40+", label: "products shipped" },
+      { value: "8–14 wks", label: "idea to live MVP", icon: "clock" },
+      { value: "Weekly", label: "demos, no black box", icon: "users" },
+      { value: "100%", label: "code & IP yours", icon: "lock" },
+      { value: "40+", label: "products shipped", icon: "rocket" },
     ],
     deliverables: [
       {
@@ -581,6 +674,43 @@ export const SERVICES: Service[] = [
         a: "Often, yes. We start with a paid code and architecture review that tells you honestly what's salvageable, what should be rewritten and what it will cost either way.",
       },
     ],
+    challenge: {
+      title: ["A great idea, stuck", "before launch?"],
+      desc: "Good ideas stall on unclear scope, the wrong technical choices, or a build that never quite reaches real users.",
+      pains: [
+        {
+          title: "Unclear scope",
+          desc: "Too many features and no clear first version to put in front of users.",
+          icon: "layers",
+        },
+        {
+          title: "Slow, costly builds",
+          desc: "Months of work and budget spent before anyone can try the product.",
+          icon: "clock",
+        },
+        {
+          title: "Can't scale later",
+          desc: "A rushed prototype that has to be rewritten the moment it grows.",
+          icon: "trend",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "Your idea", icon: "spark" },
+        { label: "User research", icon: "users" },
+        { label: "Designs & wireframes", icon: "pen" },
+        { label: "Existing data", icon: "folder" },
+      ],
+      core: { title: "Product build", desc: "Scoped, designed and engineered" },
+      outputs: [
+        { label: "Live MVP", icon: "rocket" },
+        { label: "Admin dashboard", icon: "dashboard" },
+        { label: "Payments & billing", icon: "card" },
+        { label: "Usage analytics", icon: "chart" },
+      ],
+    },
+    caseStudy: "gateoria-event-platform",
     related: ["ai-development-automation", "mobile-app-development", "critical-product-engineering"],
   },
 
@@ -599,10 +729,10 @@ export const SERVICES: Service[] = [
     icon: "mobile",
     image: "/services/mobile-app-development.avif",
     stats: [
-      { value: "4.8★", label: "typical store rating" },
-      { value: "2", label: "platforms, one codebase" },
-      { value: "10–16 wks", label: "concept to store" },
-      { value: "100%", label: "offline-capable builds" },
+      { value: "4.8★", label: "typical store rating", icon: "check" },
+      { value: "2", label: "platforms, one codebase", icon: "mobile" },
+      { value: "10–16 wks", label: "concept to store", icon: "clock" },
+      { value: "100%", label: "offline-capable builds", icon: "sync" },
     ],
     deliverables: [
       {
@@ -700,6 +830,8 @@ export const SERVICES: Service[] = [
     ],
     tech: [
       "React Native",
+      "Flutter",
+      "Dart",
       "React",
       "Node.js",
       "Spring Boot",
@@ -748,6 +880,43 @@ export const SERVICES: Service[] = [
         a: "It happens, and it's included. We handle the response, the fix and the resubmission — and we design around the common rejection reasons in advance, so it's rare.",
       },
     ],
+    challenge: {
+      title: ["Users install your app,", "then forget it?"],
+      desc: "Crashes, slow screens and missing basics like offline mode or notifications push users to uninstall within days.",
+      pains: [
+        {
+          title: "Crashes & bugs",
+          desc: "Unstable releases earn one-star reviews that are hard to recover from.",
+          icon: "alert",
+        },
+        {
+          title: "Two separate codebases",
+          desc: "Building iOS and Android apart doubles the cost of every change.",
+          icon: "code",
+        },
+        {
+          title: "No way back in",
+          desc: "Without useful notifications, users drift away after the first week.",
+          icon: "bell",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "App users", icon: "users" },
+        { label: "Payments", icon: "card" },
+        { label: "Location & maps", icon: "map" },
+        { label: "Your backend", icon: "plug" },
+      ],
+      core: { title: "Mobile app", desc: "One codebase, iOS & Android" },
+      outputs: [
+        { label: "App Store & Play release", icon: "rocket" },
+        { label: "Push notifications", icon: "bell" },
+        { label: "Offline sync", icon: "sync" },
+        { label: "Admin panel", icon: "dashboard" },
+      ],
+    },
+    caseStudy: "careconnect-health-booking-app",
     related: ["web-app-saas-mvp", "ai-development-automation", "critical-product-engineering"],
   },
 
@@ -766,10 +935,10 @@ export const SERVICES: Service[] = [
     icon: "shield",
     image: "/services/critical-product-engineering.avif",
     stats: [
-      { value: "0", label: "security incidents to date" },
-      { value: "99.9%", label: "uptime targets met" },
-      { value: "<50ms", label: "typical API response" },
-      { value: "Senior-only", label: "engineers on these builds" },
+      { value: "0", label: "security incidents to date", icon: "shield" },
+      { value: "99.9%", label: "uptime targets met", icon: "check" },
+      { value: "<50ms", label: "typical API response", icon: "bolt" },
+      { value: "Senior-only", label: "engineers on these builds", icon: "users" },
     ],
     deliverables: [
       {
@@ -915,6 +1084,43 @@ export const SERVICES: Service[] = [
         a: "HSMs or managed KMS for key material, no secrets in code or CI logs, least-privilege IAM, and rotation policies documented at handover. For custody work, multi-sig and threshold schemes are designed in from the start.",
       },
     ],
+    challenge: {
+      title: ["Systems you can't afford", "to get wrong?"],
+      desc: "In fintech, crypto and high-traffic products, a slow endpoint or a security gap means lost funds, lost trust and lost customers.",
+      pains: [
+        {
+          title: "Security gaps",
+          desc: "Weak auth, exposed keys or unaudited code waiting to be found.",
+          icon: "lock",
+        },
+        {
+          title: "Slow under load",
+          desc: "Systems that slow down or fail exactly when traffic peaks.",
+          icon: "gauge",
+        },
+        {
+          title: "Fragile integrations",
+          desc: "Payment, exchange and partner APIs that break in silent, costly ways.",
+          icon: "plug",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "User transactions", icon: "card" },
+        { label: "Partner APIs", icon: "plug" },
+        { label: "Market data", icon: "chart" },
+        { label: "Admin actions", icon: "users" },
+      ],
+      core: { title: "Hardened backend", desc: "Secure, fast and audited" },
+      outputs: [
+        { label: "Settled payments", icon: "check" },
+        { label: "Full audit trail", icon: "doc" },
+        { label: "Real-time alerts", icon: "bell" },
+        { label: "Live monitoring", icon: "dashboard" },
+      ],
+    },
+    caseStudy: "crypto-wallet-trading-app",
     related: ["web-app-saas-mvp", "ai-development-automation", "dedicated-team-cto-support"],
   },
 
@@ -933,10 +1139,10 @@ export const SERVICES: Service[] = [
     icon: "team",
     image: "/services/dedicated-team-cto-support.avif",
     stats: [
-      { value: "2 wks", label: "to a working team" },
-      { value: "4–6 hrs", label: "US/EU overlap daily" },
-      { value: "White-label", label: "delivery available" },
-      { value: "Monthly", label: "rolling — no lock-in" },
+      { value: "2 wks", label: "to a working team", icon: "rocket" },
+      { value: "4–6 hrs", label: "US/EU overlap daily", icon: "clock" },
+      { value: "White-label", label: "delivery available", icon: "layers" },
+      { value: "Monthly", label: "rolling — no lock-in", icon: "sync" },
     ],
     deliverables: [
       {
@@ -1041,6 +1247,8 @@ export const SERVICES: Service[] = [
       "Laravel",
       "PHP",
       "React Native",
+      "Flutter",
+      "Dart",
       "Prisma",
       "PostgreSQL",
     ],
@@ -1086,6 +1294,43 @@ export const SERVICES: Service[] = [
         a: "One month's notice on a rolling monthly agreement. No annual lock-in — we'd rather earn the renewal each month than trap you in a contract.",
       },
     ],
+    challenge: {
+      title: ["Need engineers, but can't", "hire fast enough?"],
+      desc: "Hiring takes months, freelancers come and go, and your roadmap slips while the team is still being built.",
+      pains: [
+        {
+          title: "Slow hiring",
+          desc: "Months of recruiting before a single feature ships.",
+          icon: "clock",
+        },
+        {
+          title: "No technical leadership",
+          desc: "Nobody owning architecture, code quality or delivery decisions.",
+          icon: "cpu",
+        },
+        {
+          title: "Unpredictable delivery",
+          desc: "Missed deadlines and surprises because nobody sees the full picture.",
+          icon: "alert",
+        },
+      ],
+    },
+    flow: {
+      inputs: [
+        { label: "Your roadmap", icon: "map" },
+        { label: "Product backlog", icon: "layers" },
+        { label: "Existing codebase", icon: "code" },
+        { label: "Business goals", icon: "trend" },
+      ],
+      core: { title: "Dedicated team", desc: "Devs, tech lead, QA & DevOps" },
+      outputs: [
+        { label: "Weekly releases", icon: "rocket" },
+        { label: "Sprint demos", icon: "users" },
+        { label: "Code reviews", icon: "check" },
+        { label: "Progress reports", icon: "chart" },
+      ],
+    },
+    caseStudy: "healthfix-web-and-app",
     related: ["web-app-saas-mvp", "ai-development-automation", "mobile-app-development"],
   },
 ];
