@@ -29,6 +29,7 @@ type NavItem = {
 const NAV: NavItem[] = [
   {
     label: "Solutions",
+    href: "/solutions",
     width: "w-[23rem]",
     footer: { label: "See all four solutions", href: "/solutions", icon: "grid" },
     menu: [
@@ -64,6 +65,7 @@ const NAV: NavItem[] = [
   },
   {
     label: "Why Nexalinx",
+    href: "/why-nexalinx",
     width: "w-[22rem]",
     menu: [
       {
@@ -92,6 +94,7 @@ const NAV: NavItem[] = [
   { label: "Success Stories", href: "/success-stories" },
   {
     label: "Services",
+    href: "/services",
     width: "w-[24rem]",
     footer: { label: "Compare all six services", href: "/services", icon: "grid" },
     menu: [
@@ -141,6 +144,7 @@ const NAV: NavItem[] = [
   },
   {
     label: "Insights",
+    href: "/insights",
     width: "w-[22rem]",
     menu: [
       {
@@ -219,10 +223,15 @@ export function Header() {
                 onMouseEnter={() => openWith(item.label)}
                 onMouseLeave={scheduleClose}
               >
-                <button
+                {/* The label is a real link to the group's landing page; hover/focus opens the menu */}
+                <a
+                  href={item.href}
+                  onFocus={() => openWith(item.label)}
+                  onClick={() => setOpenMenu(null)}
                   className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                     dark ? "text-white/85 hover:text-white" : "text-slate-600 hover:text-brand-600"
                   }`}
+                  aria-haspopup="true"
                   aria-expanded={openMenu === item.label}
                 >
                   {item.label}
@@ -232,7 +241,7 @@ export function Header() {
                   >
                     <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </button>
+                </a>
 
                 {openMenu === item.label && (
                   <div
@@ -377,16 +386,27 @@ function MobileGroup({ item, onNavigate }: { item: NavItem; onNavigate: () => vo
   }
   return (
     <div>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold text-ink hover:bg-slate-50"
-      >
-        {item.label}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
-          className={`transition-transform ${open ? "rotate-180" : ""}`}>
-          <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
+      {/* Label goes to the landing page; the chevron alone expands the submenu */}
+      <div className="flex items-center rounded-lg hover:bg-slate-50">
+        <a
+          href={item.href}
+          onClick={onNavigate}
+          className="flex-1 px-3 py-2.5 text-sm font-semibold text-ink"
+        >
+          {item.label}
+        </a>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={`${open ? "Collapse" : "Expand"} ${item.label} menu`}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-slate-100"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
+            className={`transition-transform ${open ? "rotate-180" : ""}`}>
+            <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
       {open && (
         <div className="ml-2 space-y-0.5 border-l border-slate-100 pl-2">
           {item.menu.map((sub) => {
