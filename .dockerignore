@@ -1,0 +1,19 @@
+# Rebuilt inside the image — never copy the host's copies (Windows binaries, dev cache)
+node_modules
+.next
+out
+build
+
+# Not needed to build the site
+.git
+.gitignore
+.vscode
+.claude
+Dockerfile
+docker-compose.yml
+.dockerignore
+*.docx
+*.tsbuildinfo
+npm-debug.log*
+.DS_Store
+.env*.local
